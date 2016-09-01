@@ -5,19 +5,21 @@ var locationData = [
   {
     locationName: 'Homestead',
     latLng: {lat: 37.826058, lng: -122.253213},
+    id : 'ChIJvzf2ODp-j4ARFdkUw7a_nTw'
   },
 
   {
     locationName: 'Central Kitchen',
-    latLng: {lat: 37.759191, lng: -122.411053}
+    latLng: {lat: 37.759191, lng: -122.411053},
+    id : 'ChIJr-EMFjd-j4ARHKaF3ehlmgY'
   },
 
   {
     locationName: 'Abbot\'s Cellar',
-    latLng: {lat: 37.761071, lng: -122.421882}
+    latLng: {lat: 37.761071, lng: -122.421882},
+    id : 'ChIJu0_1IT1-j4ARDc5-8cFyQUk'
   }
 ];
-
 
 var KoViewModel = function() {
   var self = this;
@@ -140,6 +142,7 @@ var KoViewModel = function() {
       animation: google.maps.Animation.DROP,
       icon: defaultIcon,
       title: place.locationName
+      placeId: place.placeId
     };
 
     place.marker = new google.maps.Marker(markerOptions);
@@ -225,10 +228,10 @@ var KoViewModel = function() {
   function Place(dataObj) {
     this.locationName = dataObj.locationName;
     this.latLng = dataObj.latLng;
-
     // You will save a reference to the Places' map marker after you build the
     // marker:
     this.marker = null;
+    this.placeId = dataObj.id;
   }
 
 };
