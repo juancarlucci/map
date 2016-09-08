@@ -21,6 +21,7 @@ var locationData = [
   }
 ];
 
+
 var KoViewModel = function() {
   var self = this;
   // Create a styles array to use with the map.
@@ -134,16 +135,35 @@ var KoViewModel = function() {
   // mouses over the marker.
   var highlightedIcon = makeMarkerIcon('f0560b');
 
+  var butterIcon = {
+    url: 'images/butter2.svg',
+    //state your size parameters in terms of pixels
+    size: new google.maps.Size(70, 60),
+    scaledSize: new google.maps.Size(70, 60),
+    origin: new google.maps.Point(0,0)
+    };
+
   // Build Markers via the Maps API and place them on the map.
   self.allPlaces.forEach(function(place) {
     var markerOptions = {
       map: self.googleMap,
       position: place.latLng,
       animation: google.maps.Animation.DROP,
-      icon: defaultIcon,
-      title: place.locationName
-      placeId: place.placeId
+      // icon: defaultIcon,
+      icon: butterIcon,
+      // must use optimized false for CSS
+      optimized: false,
+      title: place.locationName,
+      // placeId: place.id
+      placeId: place.placeId,
     };
+
+    // var myoverlay = new google.maps.OverlayView();
+    //   myoverlay.draw = function () {
+    //       this.getPanes().markerLayer.id='markerLayer';
+    //   };
+    // myoverlay.setMap(map);
+
 
     place.marker = new google.maps.Marker(markerOptions);
 
@@ -151,10 +171,14 @@ var KoViewModel = function() {
     // place.marker.addListener('click', function() {
     //   populateInfoWindow(this, largeInfowindow);
     // });
-    
+
+    // You might also add listeners onto the marker, such as "click" listeners.
     place.marker.addListener('click', function() {
       getPlacesDetails(this, largeInfowindow);
     });
+
+
+
     // Two event listeners - one for mouseover, one for mouseout,
     // to change the colors back and forth.
     place.marker.addListener('mouseover', function() {
@@ -193,7 +217,6 @@ var KoViewModel = function() {
     var searchInput = self.userInput().toLowerCase();
 
     self.visiblePlaces.removeAll();
-
     // This looks at the name of each places and then determines if the user
     // input can be found within the place name.
     self.allPlaces.forEach(function(place) {
@@ -207,6 +230,7 @@ var KoViewModel = function() {
 
     self.visiblePlaces().forEach(function(place) {
       place.marker.setVisible(true);
+
     });
   };
 
@@ -215,26 +239,73 @@ var KoViewModel = function() {
   // of 0, 0 and be anchored at 10, 34).
   function makeMarkerIcon(markerColor) {
     var markerImage = new google.maps.MarkerImage(
-      'http://chart.googleapis.com/chart?chst=d_map_spin&chld=1.15|0|'+ markerColor +
+      'images/butter2.svg'+ markerColor +
       '|40|_|%E2%80%A2',
-      new google.maps.Size(21, 34),
+      // 'http://chart.googleapis.com/chart?chst=d_map_spin&chld=1.15|0|'+ markerColor +
+      // '|40|_|%E2%80%A2',
+      new google.maps.Size(70, 60),
       new google.maps.Point(0, 0),
-      new google.maps.Point(10, 34),
-      new google.maps.Size(21,34));
+      new google.maps.Point(35, 60),
+      new google.maps.Size(70,60));
     return markerImage;
   }
 
 
   function Place(dataObj) {
+    this.placeId = dataObj.id;
     this.locationName = dataObj.locationName;
     this.latLng = dataObj.latLng;
+
     // You will save a reference to the Places' map marker after you build the
     // marker:
     this.marker = null;
-    this.placeId = dataObj.id;
+  }
+  function getPlacesDetails(marker, infowindow) {
+    var service = new google.maps.places.PlacesService(map);
+    service.getDetails({
+      placeId: marker.placeId
+      // placeId: place.place_id
+    }, function(place, status) {
+      if (status === google.maps.places.PlacesServiceStatus.OK) {
+        // Set the marker property on this infowindow so it isn't created again.
+        infowindow.marker = marker;
+        var innerHTML = '<div>';
+        if (place.name) {
+          innerHTML += '<strong>' + place.name + '</strong>';
+        }
+        if (place.formatted_address) {
+          innerHTML += '<br>' + place.formatted_address;
+        }
+        if (place.formatted_phone_number) {
+          innerHTML += '<br>' + place.formatted_phone_number;
+        }
+        if (place.opening_hours) {
+          innerHTML += '<br><br><strong>Hours:</strong><br>' +
+              place.opening_hours.weekday_text[0] + '<br>' +
+              place.opening_hours.weekday_text[1] + '<br>' +
+              place.opening_hours.weekday_text[2] + '<br>' +
+              place.opening_hours.weekday_text[3] + '<br>' +
+              place.opening_hours.weekday_text[4] + '<br>' +
+              place.opening_hours.weekday_text[5] + '<br>' +
+              place.opening_hours.weekday_text[6];
+        }
+        if (place.photos) {
+          innerHTML += '<br><br><img src="' + place.photos[0].getUrl(
+              {maxHeight: 100, maxWidth: 200}) + '">';
+        }
+        innerHTML += '</div>';
+        infowindow.setContent(innerHTML);
+        infowindow.open(map, marker);
+        // Make sure the marker property is cleared if the infowindow is closed.
+        infowindow.addListener('closeclick', function() {
+          infowindow.marker = null;
+        });
+      }
+    });
   }
 
 };
+
 function populateInfoWindow(marker, infowindow) {
   // Check to make sure the infowindow is not already opened on this marker.
   if (infowindow.marker != marker) {
@@ -277,10 +348,11 @@ function populateInfoWindow(marker, infowindow) {
     infowindow.open(map, marker);
   }
 }
+
 function getPlacesDetails(marker, infowindow) {
   var service = new google.maps.places.PlacesService(map);
   service.getDetails({
-    placeId: placeId
+    placeId: place.placeId
   }, function(place, status) {
     if (status === google.maps.places.PlacesServiceStatus.OK) {
       // Set the marker property on this infowindow so it isn't created again.
