@@ -154,8 +154,7 @@ var KoViewModel = function() {
       // must use optimized false for CSS
       optimized: false,
       title: place.locationName,
-      // placeId: place.id
-      placeId: place.placeId,
+      placeId: place.placeId
     };
 
     // var myoverlay = new google.maps.OverlayView();
@@ -264,7 +263,6 @@ var KoViewModel = function() {
     var service = new google.maps.places.PlacesService(map);
     service.getDetails({
       placeId: marker.placeId
-      // placeId: place.place_id
     }, function(place, status) {
       if (status === google.maps.places.PlacesServiceStatus.OK) {
         // Set the marker property on this infowindow so it isn't created again.
