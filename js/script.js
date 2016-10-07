@@ -1,5 +1,6 @@
 // adapted from http://codepen.io/prather-mcs/pen/KpjbNN
 // and from https://classroom.udacity.com/nanodegrees/nd001/parts/00113454014/modules/4fd8d440-9428-4de7-93c0-4dca17a36700/lessons/8304370457/concepts/83061122970923#
+var map = self.googleMap;
 
 var locationData = [
   {
