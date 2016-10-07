@@ -106,15 +106,16 @@ var KoViewModel = function() {
   // ,
   // {name:'styled map'});
 
-  // Build the Google Map object. Store a reference to it.
-  self.googleMap = new google.maps.Map(document.getElementById('map'), {
-    center: {lat: 37.760098, lng: -122.426842},
-    zoom: 13,
-    styles: styles
-    // mapTypeControlOptions: {
-    // mapTypeIds: ['roadmap', 'satellite', 'hybrid', 'terrain','styled_map']
-    // }
-  });
+//   Moved all of this to its own mapInit function outside the KoViewModel
+ 
+//   self.googleMap = new google.maps.Map(document.getElementById('map'), {
+//     center: {lat: 37.760098, lng: -122.426842},
+//     zoom: 13,
+//     styles: styles
+//     // mapTypeControlOptions: {
+//     // mapTypeIds: ['roadmap', 'satellite', 'hybrid', 'terrain','styled_map']
+//     // }
+//   });
   //Associate the styled map with the MapTypeId and set it to display.
   // self.map.mapTypes.set('styled_map', self.styledMapType);
   // map.setMapTypeId('styled_map');
@@ -391,4 +392,18 @@ function getPlacesDetails(marker, infowindow) {
   });
 }
 
-ko.applyBindings(new KoViewModel());
+// ko.applyBindings(new KoViewModel());
+
+var mapInit = function() {
+    map = new google.maps.Map(document.getElementById('map'), {
+        center: {
+            lat: 37.798814,
+            lng: -122.381601
+        },
+        zoom: 11,
+        styles: styles
+    });
+    // as per https://discussions.udacity.com/t/async-google-map-broke-my-app/42765/8
+    var googleMap = mapInit();
+    ko.applyBindings(new koViewModel(googleMap, locationData));
+};
