@@ -404,6 +404,6 @@ var mapInit = function() {
         styles: styles
     });
     // as per https://discussions.udacity.com/t/async-google-map-broke-my-app/42765/8
-    var googleMap = mapInit();
+    var googleMap = map;
     ko.applyBindings(new koViewModel(googleMap, locationData));
 };
