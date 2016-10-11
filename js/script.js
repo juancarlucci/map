@@ -352,7 +352,7 @@ function populateInfoWindow(marker, infowindow) {
 function getPlacesDetails(marker, infowindow) {
   var service = new google.maps.places.PlacesService(map);
   service.getDetails({
-    placeId: place.placeId
+    placeId: marker.placeId
   }, function(place, status) {
     if (status === google.maps.places.PlacesServiceStatus.OK) {
       // Set the marker property on this infowindow so it isn't created again.
