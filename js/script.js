@@ -131,11 +131,13 @@ var KoViewModel = function() {
     self.allPlaces.push(new Place(place));
   });
   // Style the markers a bit. This will be our listing marker icon.
-  var defaultIcon = makeMarkerIcon('808080');
+//   var defaultIcon = makeMarkerIcon('808080');
+  var defaultIcon = {url: 'images/butter2.svg',};
 
   // Create a "highlighted location" marker color for when the user
   // mouses over the marker.
-  var highlightedIcon = makeMarkerIcon('f0560b');
+//   var highlightedIcon = makeMarkerIcon('f0560b');
+  var highlightedIcon = {url: 'images/butter.svg',};
 
   var butterIcon = {
     url: 'images/butter2.svg',
@@ -151,10 +153,8 @@ var KoViewModel = function() {
       map: self.googleMap,
       position: place.latLng,
       animation: google.maps.Animation.DROP,
-      // icon: defaultIcon,
-      icon: butterIcon,
-      // must use optimized false for CSS
-      optimized: false,
+      icon: defaultIcon,
+//       icon: butterIcon,
       title: place.locationName,
       placeId: place.placeId
     };
