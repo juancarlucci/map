@@ -8,20 +8,27 @@ var locationData = [
     latLng: {lat: 37.826058, lng: -122.253213},
     id : 'ChIJvzf2ODp-j4ARFdkUw7a_nTw'
   },
-
   {
     locationName: 'Central Kitchen',
     latLng: {lat: 37.759191, lng: -122.411053},
     id : 'ChIJr-EMFjd-j4ARHKaF3ehlmgY'
   },
-
   {
     locationName: 'Abbot\'s Cellar',
     latLng: {lat: 37.761071, lng: -122.421882},
     id : 'ChIJu0_1IT1-j4ARDc5-8cFyQUk'
+  },
+  {
+    locationName: '25 Lusk',
+    latLng: {lat: 37.778598, lng: -122.394331},
+    id : 'ChIJAzkmQNZ_j4ARs6PNLtDYE_g'
+  },
+  {
+    locationName: 'Causwells',
+    latLng: {lat: 37.800545, lng: -122.442035},
+    id : 'ChIJ78j3OdSAhYAR_nZU8ILRNUU'
   }
 ];
-
 
 var KoViewModel = function() {
   var self = this;
