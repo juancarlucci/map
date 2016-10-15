@@ -19,7 +19,7 @@ list-view {
   left: 0px;
   position: absolute;
   right: 0px;
-  z-index: -2;
+/*   z-index: -2; */
 }
 
 input {
