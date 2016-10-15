@@ -142,10 +142,10 @@ var koViewModel = function() {
 	// var butterIcon = {
 	//   url: 'images/butter2.svg',
 	//   //state your size parameters in terms of pixels
-	//   // size: new google.maps.Size(15, 20),
-	//   // scale: .5,
-	//   // scaledSize: new google.maps.Size(5, 30),
-	//   // origin: new google.maps.Point(0,0)
+	//   size: new google.maps.Size(15, 20),
+	//   scale: 0.5,
+	//   scaledSize: new google.maps.Size(5, 30),
+	//   origin: new google.maps.Point(0,0)
 	//   };
 	// Build Markers via the Maps API and place them on the map.
 	self.allPlaces.forEach(function(place) {
@@ -222,6 +222,13 @@ function Place(dataObj) {
 	// marker:
 	this.marker = null;
 }
+self.listViewClick = function(marker, infowindow) {
+        // console.log(Place);
+        console.log("This is working with: " + this.locationName);
+         map.setZoom(15);
+         map.panTo(this.latLng);
+        google.maps.event.trigger(this.marker, 'click');
+};
 var mapInit = function() {
 	map = new google.maps.Map(document.getElementById('map'), {
 		center: {
