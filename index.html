@@ -1,67 +1,74 @@
 <!DOCTYPE html>
 <html>
 
-  <head>
+<head>
     <meta charset="utf-8">
     <meta name="description" content="">
     <meta name="keywords" content="">
     <meta name="author" content="Juan Carlos">
-    <title>Neighborhood Map</title>
+    <title>Neighborhood Map
+    </title>
+    <link href="style.css" rel="stylesheet">
     <!-- Map request -->
-    <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyACyB_cnxMnvemYkU_zbe7bqKnHQDQY79k&libraries=places,geometry&v=3.26&callback=mapInit"></script>
+    <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyACyB_cnxMnvemYkU_zbe7bqKnHQDQY79k&libraries=places,geometry,drawing&v=3.26&callback=mapInit">
+    </script>
     <!-- knockout-->
-     <script src="https://cdnjs.cloudflare.com/ajax/libs/knockout/3.3.0/knockout-min.js"></script>
-     <!-- Fonts -->
-     <link href="https://fonts.googleapis.com/css?family=Raleway:400,300,100,200" rel="stylesheet">
-     <link href="https://fonts.googleapis.com/css?family=Poiret+One" rel="stylesheet">
-     <link href="style.css" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/knockout/3.3.0/knockout-min.js">
+    </script>
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Raleway:400,300,100,200" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Poiret+One" rel="stylesheet">
+</head>
 
-  </head>
-
-  <body class="flex-container">
+<body>
     <div id="wrapper">
         <div>
-            <button class="btn btn-default" id="toggleList" onclick="toggleSidebar()">Hide List</button>
+            <button class="btn btn-default" id="toggleList" onclick="toggleSidebar()">Toggle List
+            </button>
         </div>
         <!-- Start wrapping the sidebar -->
         <div id="sidebar-wrapper">
-            <div class="list" >
+            <div class="list">
                 <div class="search">
-                    <h1 class="topTitle">Butter Map!!!</h1>
-                    <h2 class="title">Restaurants that use real butter:</h2>
+                    <h1 class="topTitle">Butter Map!!!
+            </h1>
+                    <h2 class="title">Restaurants that use real butter:
+            </h2>
                     <input type="search" placeholder="search restaurants..." data-bind="textInput: userInput, event: {keyup: filterMarkers}">
                 </div>
                 <div class="places">
                     <ul id="list-view" data-bind="foreach: visiblePlaces">
-                      <li data-bind="text: locationName, click: listViewClick"></li>
+                        <li data-bind="text: locationName">
+                        </li>
                     </ul>
                 </div>
-            </div> <!--list-->
-
+            </div>
+            <!--list-->
+            <div>
+                <p>Heart disease was rare in America at the turn of the century. Between 1920 and 1960, the incidence of heart disease rose precipitously to become America’s number one killer. During the same period butter consumption plummeted from eighteen
+                    pounds per person per year to four. It doesn’t take a Ph.D. in statistics to conclude that butter is not a cause. -Weston Price Foundation
+                </p>
+            </div>
         </div>
         <!--map container -->
         <div id="page_content_wrapper">
-            <div class="map" id="map"</div>
+            <div class="map" id="map">
+            </div>
         </div>
-        <!-- <footer>
-          <div><p>Heart disease was rare in America at the turn of the century. Between 1920 and 1960, the incidence of heart disease rose precipitously to become America’s number one killer. During the same period butter consumption plummeted from eighteen pounds per person per year to four. It doesn’t take a Ph.D. in statistics to conclude that butter is not a cause. -Weston Price Foundation</p></div>
-        </footer> -->
-
-<!-- when I put this  js/script.js in the <head> it does not work-->
-    <script src="js/script.js"></script>
-    <!-- Map request -->
-    <!-- <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyACyB_cnxMnvemYkU_zbe7bqKnHQDQY79k&libraries=places,geometry&v=3.26&callback=mapInit"></script> -->
-    <script>
-      function toggleSidebar() {
-          var x = document.getElementById('sidebar-wrapper');
-          if (x.style.display === 'none') {
-              x.style.display = 'block';
-          } else {
-              x.style.display = 'none';
-          }
-      }
-      </script>
-
-  </body>
+        <!-- when I put this  js/script.js in the <head> it does not work-->
+        <script src="js/script.js">
+        </script>
+        <script>
+            function toggleSidebar() {
+              var x = document.getElementById('sidebar-wrapper');
+              if (x.style.visibility === 'hidden') {
+                x.style.visibility = 'visible';
+              }
+              else {
+                x.style.visibility = 'hidden';
+              }
+            }
+        </script>
+</body>
 
 </html>
