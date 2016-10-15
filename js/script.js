@@ -238,10 +238,17 @@ var mapInit = function() {
 		zoom: 11,
 		styles: styles
 	});
+  // googleError = function() {
+  //    alert('The map could not be loaded.');
+  // };
 	// as per https://discussions.udacity.com/t/async-google-map-broke-my-app/42765/8
-	// var googleMap = mapInit();
+	// and https://discussions.udacity.com/t/handling-google-maps-in-async-and-fallback/34282
 	var googleMap = map;
 	ko.applyBindings(new koViewModel(googleMap, locationData));
+};
+
+var googleError = function() {
+   alert('The map could not be loaded.');
 };
 
 function populateInfoWindow(marker, infowindow) {
