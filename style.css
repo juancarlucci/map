@@ -3,8 +3,10 @@
 }
 
 html,
-body {
-  font-family: Garamond, sans-serif;
+body,
+input,
+list-view {
+  font-family: 'Raleway', sans-serif;
   color: #525454;
   height: 100%;
   margin: 0;
@@ -14,11 +16,11 @@ body {
 #map {
   bottom:0px;
   height: 100%;
-  left: 362px;
+  left: 0px;
   position: absolute;
   right: 0px;
+  z-index: -2;
 }
-
 
 input {
   /*position: fixed;*/
@@ -45,7 +47,9 @@ h1 {
   font-size: 30px;
   margin: 0 0 10px 0;
   text-align: center;
+    font-family: 'Poiret One', cursive;
 }
+
 h2 {
   padding: 10px;
   /*text-align: center;*/
@@ -57,45 +61,20 @@ li {
   font: 12px sans-serif;
 }
 
-/*button {
-  position: absolute;
-  top: 0px;
-  left: 0px;
-  z-index: 99;
-}*/
-
 #toggleList {
-visibility: hidden;;
+visibility: visible;
+/*position: fixed;*/
+z-index: 1;
 }
 /* On small screens, set height to 'auto' for sidenav and grid */
 @media screen and (max-width: 300px) {
-  /*.sidenav {
-    height: auto;
-    padding: 15px;
-  }*/
-  /*.row.content {height: auto;}*/
-
   #toggleList {
   visibility: visible;
+  /*position: fixed;*/
+  z-index: 1;
   }
 }
 
-
-
-
-
-
-/*!
- * Start Bootstrap - Simple Sidebar HTML Template (http://startbootstrap.com)
- * Code licensed under the Apache License v2.0.
- * For details, see http://www.apache.org/licenses/LICENSE-2.0.
- */
-
-/* Toggle Styles */
-
-body {
-    display:table;
-}
 
 #wrapper {
     display: table-row;
@@ -189,6 +168,13 @@ body {
 .sidebar-nav > .sidebar-brand a:hover {
     color: #fff;
     background: none;
+}
+
+#markerLayer img {
+  animation: pulse .5s infinite alternate;
+  -webkit-animation: pulse .5s infinite alternate;
+  transform-origin: center;
+  -webkit-transform-origin: center;
 }
 
 @media(min-width:768px) {
