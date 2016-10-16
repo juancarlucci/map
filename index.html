@@ -9,12 +9,6 @@
     <title>Neighborhood Map
     </title>
     <link href="style.css" rel="stylesheet">
-    <!-- Map request -->
-    <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyACyB_cnxMnvemYkU_zbe7bqKnHQDQY79k&libraries=places,geometry,drawing&v=3.26&callback=mapInit">
-    </script>
-    <!-- knockout-->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/knockout/3.3.0/knockout-min.js">
-    </script>
     <!-- Fonts -->
     <link href="https://fonts.googleapis.com/css?family=Raleway:400,300,100,200" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Poiret+One" rel="stylesheet">
@@ -57,6 +51,12 @@
         </div>
         <!-- when I put this  js/script.js in the <head> it does not work-->
         <script src="js/script.js">
+        </script>
+                <!-- Map request -->
+        <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyACyB_cnxMnvemYkU_zbe7bqKnHQDQY79k&libraries=places,geometry,drawing&v=3.26&callback=mapInit" onerror="googleError()">
+        </script>
+        <!-- knockout-->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/knockout/3.3.0/knockout-min.js">
         </script>
         <script>
             function toggleSidebar() {
