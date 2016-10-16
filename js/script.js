@@ -236,7 +236,8 @@ var mapInit = function() {
 			lng: -122.381601
 		},
 		zoom: 11,
-		styles: styles
+		styles: styles,
+		mapTypeControl: false
 	});
   // googleError = function() {
   //    alert('The map could not be loaded.');
