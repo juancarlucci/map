@@ -248,8 +248,14 @@ var mapInit = function() {
 	ko.applyBindings(new koViewModel(googleMap, locationData));
 };
 
-var googleError = function() {
-   alert('The map could not be loaded.');
+var googleError = function(onerror) {
+   var errorSVG = document.getElementById("errorDiv");
+	 errorSVG.innerHTML = "<img src='images/noMap.svg'/>";
+	//  Mozilla recommendes you not use innerHTML when inserting plain text; instead, use node.textContent. 
+ 	//This doesn't interpret the passed content as HTML, but instead inserts it as raw text.
+	//https://developer.mozilla.org/en-US/docs/Web/API/Element/innerHTML
+	errorSVG.textContent = ('Oops...Map did not load');
+    console.log('Oops...map did not load');
 };
 
 function populateInfoWindow(marker, infowindow) {
