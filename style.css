@@ -21,11 +21,16 @@ list-view {
   right: 0px;
 /*   z-index: -2; */
 }
+
 #errorDiv {
-  padding-top: 30%;
+  padding-top: 50%;
   text-align: center;
-  margin: auto;
+  /*margin: auto;*/
   color: #f0560b;
+  /*older browsers will stick with the PNG that they understand, while newer browsers will load the SVG:*/
+  background: url("images/noMap.png") no-repeat center;
+  background-image: url("images/noMap.svg");
+  background-size: contain;
 }
 
 input {
