@@ -21,6 +21,12 @@ list-view {
   right: 0px;
 /*   z-index: -2; */
 }
+#errorDiv {
+  padding-top: 30%;
+  text-align: center;
+  margin: auto;
+  color: #f0560b;
+}
 
 input {
   /*position: fixed;*/
