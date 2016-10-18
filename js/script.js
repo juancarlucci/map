@@ -18,12 +18,12 @@ var locationData = [{
 	},
 	id: 'ChIJr-EMFjd-j4ARHKaF3ehlmgY'
   }, {
-	locationName: 'Abbot\'s Cellar',
+	locationName: 'Tartine Bakery',
 	latLng: {
-		lat: 37.761071,
-		lng: -122.421882
+		lat: 37.761646,
+		lng: -122.424114
 	},
-	id: 'ChIJu0_1IT1-j4ARDc5-8cFyQUk'
+	id: 'ChIJBVY2Bxh-j4ARa2zO8Jd6H2A'
   }, {
 	locationName: '25 Lusk',
 	latLng: {
