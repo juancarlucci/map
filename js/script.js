@@ -351,8 +351,7 @@ function getPlacesDetails(marker, infowindow) {
 	        var hashtag = '37.786952%7C-122.399523';
 					// console.log(hashtag);
 					console.log(this.place);
-	        var wikiURL = "https://w/api.php?action=query&format=json&list=geosearch&gscoord=" + hashtag + "&gsradius=10000&gslimit=10";
-
+	          var wikiURL = "https://www.mediawiki.org//w/api.php?action=query&format=json&list=geosearch&gscoord=" + hashtag + "&gsradius=10000&gslimit=10";
 					console.log(wikiURL);
 	        //AJAX call to wikimedia
 	        $.ajax({
