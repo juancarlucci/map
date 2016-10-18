@@ -16,12 +16,16 @@
 
 <body>
     <div id="wrapper">
-        <div>
-            <button class="btn btn-default" id="toggleList" onclick="toggleSidebar()">Toggle List
-            </button>
-        </div>
+        <!-- <div>
+            <div class="btn btn-default" id="toggleList" onclick="toggleSidebar()">Toggle List
+            </div>
+        </div> -->
         <!-- Start wrapping the sidebar -->
         <div id="sidebar-wrapper">
+          <div>
+              <div class="btn btn-default" id="toggleList" onclick="toggleSidebar()">Toggle List
+              </div>
+          </div>
             <div class="list">
                 <div class="search">
                     <h1 class="topTitle">Butter Map!!!
@@ -32,8 +36,12 @@
                 </div>
                 <div class="places">
                     <ul id="list-view" data-bind="foreach: visiblePlaces">
-                        <li data-bind="text: locationName">
-                        </li>
+                      <li data-bind="text: locationName, click: listViewClick"></li>
+                    </ul>
+                </div>
+                <div class="wikiArticlesList">
+                    <ul id="list-view" data-bind="foreach: wikiArticles">
+                      <li data-bind="text: pageid, click: listViewClick"></li>
                     </ul>
                 </div>
             </div>
@@ -47,13 +55,14 @@
         <!--map container -->
         <div id="page_content_wrapper">
             <div class="map" id="map">
-                <div id=errorDiv><div>
+                <div id=errorDiv></div>
             </div>
+
         </div>
-        <!-- when I put this  js/script.js in the <head> it does not work-->
         <script src="js/script.js">
         </script>
-                <!-- Map request -->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+        <!-- Map request -->
         <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyACyB_cnxMnvemYkU_zbe7bqKnHQDQY79k&libraries=places,geometry,drawing&v=3.26&callback=mapInit" onerror="googleError()">
         </script>
         <!-- knockout-->
@@ -64,9 +73,11 @@
               var x = document.getElementById('sidebar-wrapper');
               if (x.style.visibility === 'hidden') {
                 x.style.visibility = 'visible';
+                // x.textContent= 'hide';
               }
               else {
                 x.style.visibility = 'hidden';
+                // x.textContent ='show';
               }
             }
         </script>
