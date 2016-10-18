@@ -335,3 +335,41 @@ function getPlacesDetails(marker, infowindow) {
 	});
 }
 // ko.applyBindings(new koViewModel());
+
+// Wikimedia API
+	self.wikiArticles = ko.observableArray([]);
+	// var allWikiArticles = [];
+	// locationData.forEach(function(place) {
+	// 	self.allWikiArticles.push(response.query[i].pageid);
+	// 	document.getElementById("list-view").innerHTML = self.wikiArticles;
+	// 	});
+	    // Make the call for each place
+	    // places.forEach(function(place) {
+		// console.log(Wiki places);
+	        // Variables for building URL
+	        //Example form wikimedia /w/api.php?action=query&format=json&list=geosearch&gscoord=37.786952%7C-122.399523&gsradius=10000&gslimit=10
+	        var hashtag = '37.786952%7C-122.399523';
+					// console.log(hashtag);
+					console.log(this.place);
+	        var wikiURL = "https://w/api.php?action=query&format=json&list=geosearch&gscoord=" + hashtag + "&gsradius=10000&gslimit=10";
+
+					console.log(wikiURL);
+	        //AJAX call to wikimedia
+	        $.ajax({
+	            type: "GET",
+	            dataType: "jsonp",
+	            cache: false,
+	            url: wikiURL,
+	            success: function(response) {
+								wikiResponse = response[1];
+	                    for (var i = 0; i < wikiResponse.length; i++) {
+	                        //Push article to array
+	                        allWikiArticles.push(response.query[i].pageid);
+	                    }
+	                }
+	        //On error
+		}).fail(function(error) {
+		    errorDiv = document.getElementById("errorDiv");
+	            errorDiv.textContent = ('Wikimedia feed could not be loaded');
+	        });
+	    // });
