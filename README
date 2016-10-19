@@ -2,7 +2,7 @@
 
 
 
-### What I learned doing the resume project:
+### What I learned doing the map project:
 
 1. How to build AJAX calls.
 2. Javascript Design Patterns, including basic refactoring and separation of concerns. 
@@ -16,4 +16,7 @@
 * **style.css**: Contains all of the CSS needed to style the page.
 * **README.md**: The GitHub readme file.
 * and some images in the images directory.
+
+HOW TO RUN
+Download the files and open the index.html file
 
