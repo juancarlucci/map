@@ -222,3 +222,41 @@ visibility: visible;
         margin-right: 0;
     }
 }
+.info-windows{
+		/*width: 144px;
+		height:106px;
+		color: #ffedc8;*/
+  	font-family: 'Raleway', sans-serif;
+		max-width: none;
+		padding:0px;
+		margin:0px;
+	}
+	.info-windows img{
+		padding:10px;
+		margin:0px;
+    filter: grayscale(1);
+    -webkit-filter: grayscale(1);
+    -moz-filter: grayscale(1);
+    -o-filter: grayscale(1);
+    -ms-filter: grayscale(1);
+	}
+  /*.grayscale img
+  {
+  	filter: grayscale(1);
+  	-webkit-filter: grayscale(1);
+  	-moz-filter: grayscale(1);
+  	-o-filter: grayscale(1);
+  	-ms-filter: grayscale(1);
+  }*/
+/*thanks to https://paulund.co.uk/css-filter*/
+  .info-windows img:hover {
+  	filter: grayscale(0);
+  	-webkit-filter: grayscale(0);
+  	-moz-filter: grayscale(0);
+  	-o-filter: grayscale(0);
+  	-ms-filter: grayscale(0);
+    transform: rotateY(360deg);
+    -webkit-transform: rotateY(180deg);
+    transition-duration: 1.5s;
+    -webkit-transition-duration:1s;
+  }
