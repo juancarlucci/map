@@ -140,10 +140,9 @@ self.listViewClick = function(marker, infowindow) {
                 var article = articleList[i];
                 console.log(articleList);
                 // document.getElementById("list-Wiki").innerHTML =article;
-                $wikiElem.append('<li class="article">' +
-                    '<p>' + response.query.geosearch[i].title + '</p>' +
-                    '<p>' + 'distance in meters: ' + response.query.geosearch[i].dist + '</p>' +
-                    '</li>');
+			$wikiElem.append('<li class="article">'+'<p><strong>' 
+			+response.query.geosearch[i].title+'</strong></p>'+'<p>' 
+			+'distance in meters: ' + response.query.geosearch[i].dist + '</p>'+'<hr>'+'</li>');
                   }
 
             // clearTimeout(wikiRequestTimeout);
