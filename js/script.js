@@ -2,6 +2,7 @@
 // and from https://classroom.udacity.com/nanodegrees/nd001/parts/00113454014/modules/4fd8d440-9428-4de7-93c0-4dca17a36700/lessons/8304370457/concepts/83061122970923#
 // var map;
 // "use strict";
+
 var map = self.googleMap;
 var locationData = [{
 	locationName: 'Homestead',
@@ -116,6 +117,9 @@ var styles = [{
 	}]
 }];
 var koViewModel = function() {
+	var $wikiElem = $('#wikipedia-links');
+	$wikiElem.text("Hi");
+	console.log($wikiElem);
 	var self = this;
 	var largeInfowindow = new google.maps.InfoWindow();
 	// Build "Place" objects out of raw place data. It is common to receive place
@@ -207,7 +211,6 @@ var koViewModel = function() {
 			place.marker.setVisible(true);
 		});
 	};
-	
 	self.wikiArticles = ko.observableArray();
 	// self.allPlaces.forEach(function(place) {
 	// 	self.wikiArticles.push(wikiData);
@@ -225,38 +228,65 @@ var koViewModel = function() {
 	// var wikiUrl= 'https://www.mediawiki.org//w/api.php?action=query&list=geosearch&gsradius=10000&gscoord=37.786971%7C-122.399677&gsradius=10000&gslimit=10';
 	// AJAX call to wikimedia
 	//
+	// var $wikiElem = $('#wikipedia-links');
+	// $wikiElem.text("Hi");
+	// console.log(wikiElem);
 	var locLat = locationData[1].latLng.lat;
 	var locLng = locationData[1].latLng.lng;
 	console.log(locationData[1].latLng.lng);
+	console.log(listViewClick);
 	var readyLocationName = locationData[1].locationName;
 	var encodedLocationName = encodeURI(readyLocationName);
-	console.log(encodedLocationName);
+	// console.log(encodedLocationName);
 	// var wikiUrl = "https://en.wikipedia.org/w/api.php?action=query&format=json&list=geosearch&gscoord=37.786952%7C-122.399523&gsradius=10000&gslimit=10";
 	var hashtag = locLat + '%7C' + locLng;
 	var completeWikiUrl = "https://en.wikipedia.org/w/api.php?action=query&format=json&list=geosearch&gscoord=" + hashtag + "&gsradius=10000&gslimit=10";
 	var _list = $('.link-list');
-	$(function() {
-		$.ajax({
+
+
+	$.ajax({
 			url: completeWikiUrl,
-			dataType: 'jsonp',
-			success: function(data) {
-				var wikiData = data.query.geosearch;
-				console.log(wikiData);
-				// wikiData.forEach(function(link) {
-				for(var i = 0; i < wikiData.length; i++) {
-					console.log(wikiData[i]);
-					return wikiData;
-				}
-				_list.append('<li>~<a href="' + wikiData + '">' + wikiData + '</a></li><hr>');
-				// document.getElementById("list-Wiki").innerHTML = wikiData;
-				// });
+			dataType: "jsonp",
+			jsonp: "callback",
+			success: function( response ) {
+					var articleList = response[1];
+					console.log(response.query);
+					console.log(listViewClick.locLat);
+					console.log("This marker is : " + this.latLng.lat);
+					for (var i = 0; i < articleList.length; i++) {
+							articleStr = articleList[i];
+							var url = 'http://en.wikipedia.org/wiki/' + articleStr;
+							$wikiElem.append('<li><a href="' + url + '">' + articleStr + '</a></li>');
+					}
+
+					clearTimeout(wikiRequestTimeout);
 			}
-		}).fail(function(error) {
-			errorDiv = document.getElementById("errorDiv");
-			errorDiv.textContent = ('Wikimedia feed could not be loaded');
-		});
 	});
-// };
+
+
+	// $(function() {
+	// 	$.ajax({
+	// 		url: completeWikiUrl,
+	// 		dataType: 'jsonp',
+	// 		success: function(data) {
+	// 			var articleList = data[1];
+	// 			// var wikiData = data.query.geosearch;
+	// 			// console.log(wikiData);
+	// 			// wikiData.forEach(function(link) {
+	// 			for(var i = 0; i < wikiData.length; i++) {
+	// 				// console.log(wikiData[i]);
+	// 				// return wikiData;
+	// 			}
+	// 			// _list.append('<li>~<a href="' + wikiData + '">' + wikiData + '</a></li><hr>');
+	// 			// document.getElementById("list-Wiki").innerHTML = wikiData;
+	// 			// });
+	// 		}
+	// 	}).fail(function(error) {
+	// 		errorDiv = document.getElementById("errorDiv");
+	// 		errorDiv.textContent = ('Wikimedia feed could not be loaded');
+	// 	});
+	// });
+};
 // console.log(link);
 function Place(dataObj) {
 	this.placeId = dataObj.id;
@@ -268,12 +298,16 @@ function Place(dataObj) {
 }
 self.listViewClick = function(marker, infowindow) {
 	// console.log(Place);
-	console.log("This is working with: " + this.locationName);
-	console.log("This marker is : " + this.marker);
+	// console.log("This is working with: " + this.locationName);
+	// console.log("This marker is : " + this.latLng.lat);
+	var locLat = this.latLng.lat;
+	locLat = this.latLng.lat;
+	var locLng = this.latLng.lng;
+	console.log("This lat: " + locLat);
+	console.log("This Lng : " + locLng);
 	map.setZoom(15);
 	map.panTo(this.latLng);
 	google.maps.event.trigger(this.marker, 'click');
-	// marker.setAnimation(google.maps.Animation.BOUNCE);
 };
 var mapInit = function() {
 	map = new google.maps.Map(document.getElementById('map'), {
@@ -386,4 +420,5 @@ function getPlacesDetails(marker, infowindow) {
 		}
 		console.log(this.place);
 	}
+
 }
