@@ -286,7 +286,7 @@ function getPlacesDetails(marker, infowindow) {
             // Set the marker property on this infowindow so it isn't created again.
             infowindow.marker = marker;
             infowindow.marker.addListener('click', toggleBounce);
-            var innerHTML = '<div>';
+            var innerHTML = '<div class=info-windows>';
             if (place.name) {
                 innerHTML += '<strong>' + place.name + '</strong>';
             }
