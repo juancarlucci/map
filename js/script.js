@@ -10,28 +10,28 @@ var locationData = [{
 		lng: -122.253213
 	},
 	id: 'ChIJvzf2ODp-j4ARFdkUw7a_nTw'
-  }, {
+}, {
 	locationName: 'Central Kitchen',
 	latLng: {
 		lat: 37.759191,
 		lng: -122.411053
 	},
 	id: 'ChIJr-EMFjd-j4ARHKaF3ehlmgY'
-  }, {
+}, {
 	locationName: 'Tartine Bakery',
 	latLng: {
 		lat: 37.761646,
 		lng: -122.424114
 	},
 	id: 'ChIJBVY2Bxh-j4ARa2zO8Jd6H2A'
-  }, {
+}, {
 	locationName: '25 Lusk',
 	latLng: {
 		lat: 37.778598,
 		lng: -122.394331
 	},
 	id: 'ChIJAzkmQNZ_j4ARs6PNLtDYE_g'
-  }, {
+}, {
 	locationName: 'Causwells',
 	latLng: {
 		lat: 37.800545,
@@ -158,11 +158,6 @@ var koViewModel = function() {
 			title: place.locationName,
 			placeId: place.placeId,
 		};
-		// var myoverlay = new google.maps.OverlayView();
-		//   myoverlay.draw = function () {
-		//       this.getPanes().markerLayer.id='markerLayer';
-		//   };
-		// myoverlay.setMap(map);
 		place.marker = new google.maps.Marker(markerOptions);
 		// You might also add listeners onto the marker, such as "click" listeners.
 		// place.marker.addListener('click', function() {
@@ -212,8 +207,57 @@ var koViewModel = function() {
 			place.marker.setVisible(true);
 		});
 	};
-};
-
+	
+	self.wikiArticles = ko.observableArray();
+	// self.allPlaces.forEach(function(place) {
+	// 	self.wikiArticles.push(wikiData);
+	// 	console.log(wikiArticles);
+	// });
+	// var allWikiArticles = [];
+	// locationData.forEach(function(place) {
+	// 	self.allWikiArticles.push(response.query[i].pageid);
+	// 	});
+	// Make the call for each place
+	// places.forEach(function(place) {
+	// console.log(this.place.marker);
+	// Variables for building URL
+	//Example form wikimedia
+	// var wikiUrl= 'https://www.mediawiki.org//w/api.php?action=query&list=geosearch&gsradius=10000&gscoord=37.786971%7C-122.399677&gsradius=10000&gslimit=10';
+	// AJAX call to wikimedia
+	//
+	var locLat = locationData[1].latLng.lat;
+	var locLng = locationData[1].latLng.lng;
+	console.log(locationData[1].latLng.lng);
+	var readyLocationName = locationData[1].locationName;
+	var encodedLocationName = encodeURI(readyLocationName);
+	console.log(encodedLocationName);
+	// var wikiUrl = "https://en.wikipedia.org/w/api.php?action=query&format=json&list=geosearch&gscoord=37.786952%7C-122.399523&gsradius=10000&gslimit=10";
+	var hashtag = locLat + '%7C' + locLng;
+	var completeWikiUrl = "https://en.wikipedia.org/w/api.php?action=query&format=json&list=geosearch&gscoord=" + hashtag + "&gsradius=10000&gslimit=10";
+	var _list = $('.link-list');
+	$(function() {
+		$.ajax({
+			url: completeWikiUrl,
+			dataType: 'jsonp',
+			success: function(data) {
+				var wikiData = data.query.geosearch;
+				console.log(wikiData);
+				// wikiData.forEach(function(link) {
+				for(var i = 0; i < wikiData.length; i++) {
+					console.log(wikiData[i]);
+					return wikiData;
+				}
+				_list.append('<li>~<a href="' + wikiData + '">' + wikiData + '</a></li><hr>');
+				// document.getElementById("list-Wiki").innerHTML = wikiData;
+				// });
+			}
+		}).fail(function(error) {
+			errorDiv = document.getElementById("errorDiv");
+			errorDiv.textContent = ('Wikimedia feed could not be loaded');
+		});
+	});
+// };
+// console.log(link);
 function Place(dataObj) {
 	this.placeId = dataObj.id;
 	this.locationName = dataObj.locationName;
@@ -223,11 +267,13 @@ function Place(dataObj) {
 	this.marker = null;
 }
 self.listViewClick = function(marker, infowindow) {
-        // console.log(Place);
-        console.log("This is working with: " + this.locationName);
-         map.setZoom(15);
-         map.panTo(this.latLng);
-        google.maps.event.trigger(this.marker, 'click');
+	// console.log(Place);
+	console.log("This is working with: " + this.locationName);
+	console.log("This marker is : " + this.marker);
+	map.setZoom(15);
+	map.panTo(this.latLng);
+	google.maps.event.trigger(this.marker, 'click');
+	// marker.setAnimation(google.maps.Animation.BOUNCE);
 };
 var mapInit = function() {
 	map = new google.maps.Map(document.getElementById('map'), {
@@ -239,21 +285,18 @@ var mapInit = function() {
 		styles: styles,
 		mapTypeControl: false
 	});
-  // googleError = function() {
-  //    alert('The map could not be loaded.');
-  // };
 	// as per https://discussions.udacity.com/t/async-google-map-broke-my-app/42765/8
 	// and https://discussions.udacity.com/t/handling-google-maps-in-async-and-fallback/34282
 	var googleMap = map;
 	ko.applyBindings(new koViewModel(googleMap, locationData));
 };
-
 var googleError = function(onerror) {
-   var errorSVG = document.getElementById("errorDiv");
+	var errorSVG = document.getElementById("errorDiv");
 	//  Mozilla recommendes you not use innerHTML when inserting plain text; instead, use node.textContent. This doesn't interpret the passed content as HTML, but instead inserts it as raw text.
 	//https://developer.mozilla.org/en-US/docs/Web/API/Element/innerHTML
 	errorSVG.textContent = ('Oops...Map did not load');
- 	console.log('Oops...map did not load');
+	console.log('Oops...map did not load');
+	errorSVG.innerHTML = "<img src='images/noMap.svg' alt='Map failed to load'/>";
 };
 
 function populateInfoWindow(marker, infowindow) {
@@ -305,6 +348,7 @@ function getPlacesDetails(marker, infowindow) {
 		if(status === google.maps.places.PlacesServiceStatus.OK) {
 			// Set the marker property on this infowindow so it isn't created again.
 			infowindow.marker = marker;
+			infowindow.marker.addListener('click', toggleBounce);
 			var innerHTML = '<div>';
 			if(place.name) {
 				innerHTML += '<strong>' + place.name + '</strong>';
@@ -333,42 +377,13 @@ function getPlacesDetails(marker, infowindow) {
 			});
 		}
 	});
+	// adapted from https://developers.google.com/maps/documentation/javascript/examples/marker-animations?hl=de
+	function toggleBounce() {
+		if(marker.getAnimation() !== null) {
+			marker.setAnimation(null);
+		} else {
+			marker.setAnimation(google.maps.Animation.BOUNCE);
+		}
+		console.log(this.place);
+	}
 }
-// ko.applyBindings(new koViewModel());
-
-// Wikimedia API
-	self.wikiArticles = ko.observableArray([]);
-	// var allWikiArticles = [];
-	// locationData.forEach(function(place) {
-	// 	self.allWikiArticles.push(response.query[i].pageid);
-	// 	document.getElementById("list-view").innerHTML = self.wikiArticles;
-	// 	});
-	    // Make the call for each place
-	    // places.forEach(function(place) {
-		// console.log(Wiki places);
-	        // Variables for building URL
-	        //Example form wikimedia /w/api.php?action=query&format=json&list=geosearch&gscoord=37.786952%7C-122.399523&gsradius=10000&gslimit=10
-	        var hashtag = '37.786952%7C-122.399523';
-					// console.log(hashtag);
-					console.log(this.place);
-	          var wikiURL = "https://www.mediawiki.org//w/api.php?action=query&format=json&list=geosearch&gscoord=" + hashtag + "&gsradius=10000&gslimit=10";
-					console.log(wikiURL);
-	        //AJAX call to wikimedia
-	        $.ajax({
-	            type: "GET",
-	            dataType: "jsonp",
-	            cache: false,
-	            url: wikiURL,
-	            success: function(response) {
-								wikiResponse = response[1];
-	                    for (var i = 0; i < wikiResponse.length; i++) {
-	                        //Push article to array
-	                        allWikiArticles.push(response.query[i].pageid);
-	                    }
-	                }
-	        //On error
-		}).fail(function(error) {
-		    errorDiv = document.getElementById("errorDiv");
-	            errorDiv.textContent = ('Wikimedia feed could not be loaded');
-	        });
-	    // });
