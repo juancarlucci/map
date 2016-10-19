@@ -1,0 +1,19 @@
+## Neighborhood Map project
+
+
+
+### What I learned doing the resume project:
+
+1. How to build AJAX calls.
+2. Javascript Design Patterns, including basic refactoring and separation of concerns. 
+3. Goole Maps API.
+
+
+### Files included: 
+
+* **index.html**: The main HTML document. Contains links to all of the CSS and JS resources needed to render the Map.
+* **js/script.js**: Contains helper code needed to format and build the map. 
+* **style.css**: Contains all of the CSS needed to style the page.
+* **README.md**: The GitHub readme file.
+* and some images in the images directory.
+
