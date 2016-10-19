@@ -65,9 +65,9 @@ h2 {
 
 li {
   margin-left: 0px;
-  /*marin: auto:*/
+  font-family: 'Poiret One',
   padding: 2px 0;
-  font: 12px sans-serif;
+  font: 12px;
   list-style-type: none;
 }
 
