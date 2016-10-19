@@ -40,7 +40,7 @@
                     </ul>
                 </div>
                 <div class="wikiArticlesList">
-                    <ul id="list-view" data-bind="foreach: wikiArticles">
+                    <ul id="list-Wiki"  data-bind="foreach: wikiData">
                       <li data-bind="text: pageid, click: listViewClick"></li>
                     </ul>
                 </div>
@@ -62,12 +62,13 @@
         <script src="js/script.js">
         </script>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
-        <!-- Map request -->
-        <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyACyB_cnxMnvemYkU_zbe7bqKnHQDQY79k&libraries=places,geometry,drawing&v=3.26&callback=mapInit" onerror="googleError()">
-        </script>
         <!-- knockout-->
         <script src="https://cdnjs.cloudflare.com/ajax/libs/knockout/3.3.0/knockout-min.js">
         </script>
+        <!-- Map request -->
+        <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyACyB_cnxMnvemYkU_zbe7bqKnHQDQY79k&libraries=places,geometry,drawing&v=3.26&callback=mapInit" onerror="googleError()">
+        </script>
+
         <script>
             function toggleSidebar() {
               var x = document.getElementById('sidebar-wrapper');
