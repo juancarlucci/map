@@ -122,40 +122,11 @@ self.listViewClick = function(marker, infowindow) {
     map.setZoom(15);
     map.panTo(this.latLng);
     google.maps.event.trigger(this.marker, 'click');
-    var $wikiElem = $('#wikipedia-articles');
-    $wikiElem.text("");
-    var hashtag = locLat + '%7C' + locLng;
-    var completeWikiUrl = "https://en.wikipedia.org/w/api.php?action=query&format=json&list=geosearch&gscoord=" + hashtag + "&gsradius=10000&gslimit=10";
-    var _list = $('.link-list');
-
-    $.ajax({
-        url: completeWikiUrl,
-        dataType: "jsonp",
-        jsonp: "callback",
-        success: function(response) {
-            console.log(response);
-            var articleList = response.query.geosearch;
-
-            for (var i = 0; i < articleList.length; i++) {
-                var article = articleList[i];
-                console.log(articleList);
-                // document.getElementById("list-Wiki").innerHTML =article;
-			$wikiElem.append('<li class="article">'+'<p><strong>' 
-			+response.query.geosearch[i].title+'</strong></p>'+'<p>' 
-			+'distance in meters: ' + response.query.geosearch[i].dist + '</p>'+'<hr>'+'</li>');
-                  }
-
-            // clearTimeout(wikiRequestTimeout);
-        }
-    });
-    // };
-
 };
 
 var koViewModel = function() {
     var locLat = [];
     var locLng = [];
-    // console.log(locLat);
     var self = this;
     var largeInfowindow = new google.maps.InfoWindow();
     // Build "Place" objects out of raw place data. It is common to receive place
@@ -183,19 +154,45 @@ var koViewModel = function() {
             map: map,
             position: place.latLng,
             animation: google.maps.Animation.DROP,
-            // icon: butterIcon,
             icon: defaultIcon,
             title: place.locationName,
             placeId: place.placeId,
         };
         place.marker = new google.maps.Marker(markerOptions);
-        // You might also add listeners onto the marker, such as "click" listeners.
-        // place.marker.addListener('click', function() {
-        //   populateInfoWindow(this, largeInfowindow);
-        // });
+		
         place.marker.addListener('click', function() {
             getPlacesDetails(this, largeInfowindow);
-        });
+	    
+			locLat = this.lat;
+			locLng = this.lng;
+			console.log("This lat: " + this.lat);
+			console.log("This Lng : " + this.lng);
+			var $wikiElem = $('#wikipedia-articles');
+			$wikiElem.text("");
+			var hashtag = locLat + '%7C' + locLng;
+			var completeWikiUrl = "https://en.wikipedia.org/w/api.php?action=query&format=json&list=geosearch&gscoord=" + hashtag + "&gsradius=10000&gslimit=10";
+			var _list = $('.link-list');
+
+			$.ajax({
+				url: completeWikiUrl,
+				dataType: "jsonp",
+				jsonp: "callback",
+				success: function( response ) {
+						console.log(response);
+						var articleList = response.query.geosearch;
+							for (var i = 0; i < articleList.length; i++) {
+									var article = articleList[i];
+									$wikiElem.append('<li class="article">'+
+											'<p><strong>' +response.query.geosearch[i].title+'</strong></p>'+
+											'<p>' +'distance in meters: ' + response.query.geosearch[i].dist + '</p>'+'<hr>'+
+									'</li>');
+									}
+
+							// clearTimeout(wikiRequestTimeout);
+					}
+			});//end AJAX call
+        }); //end place.marker.addListener function
+		
         // Two event listeners - one for mouseover, one for mouseout,
         // to change the colors back and forth.
         place.marker.addListener('mouseover', function() {
@@ -204,7 +201,8 @@ var koViewModel = function() {
         place.marker.addListener('mouseout', function() {
             this.setIcon(defaultIcon);
         });
-    });
+    }); //end self.allPlaces.forEach function
+	
     // This array will contain what its name implies: only the markers that should
     // be visible based on user input. My solution does not need to use an
     // observableArray for this purpose, but other solutions may require that.
