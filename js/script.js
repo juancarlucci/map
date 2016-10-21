@@ -2,8 +2,8 @@
 // and from https://classroom.udacity.com/nanodegrees/nd001/parts/00113454014/modules/4fd8d440-9428-4de7-93c0-4dca17a36700/lessons/8304370457/concepts/83061122970923#
 // var map;
 // "use strict";
-
 var map = self.googleMap;
+var errorSVG = document.getElementById("errorDiv");
 var locationData = [{
 	locationName: 'Homestead',
 	latLng: {
@@ -40,6 +40,7 @@ var locationData = [{
 	},
 	id: 'ChIJ78j3OdSAhYAR_nZU8ILRNUU'
 }];
+
 var styles = [{
 	"elementType": "labels.text.fill",
 	"stylers": [{
@@ -58,7 +59,6 @@ var styles = [{
 		}, {
 			"saturation": -28
 		},
-		// { "color": "#32302f" },
 		{
 			"color": "#e5e3df"
 		}
@@ -68,7 +68,6 @@ var styles = [{
 	"stylers": [{
 			"visibility": "on"
 		},
-		// { "color": "#808080" },
 		{
 			"color": "#e5e3df"
 		}
@@ -116,25 +115,17 @@ var styles = [{
 		"visibility": "on"
 	}]
 }];
+
 self.listViewClick = function(marker, infowindow) {
-	// console.log(Place);
-	// console.log("This is working with: " + this.locationName);
-	// console.log("This marker is : " + this.latLng.lat);
-	// var locLat = this.latLng.lat;
 	locLat = this.latLng.lat;
 	locLng = this.latLng.lng;
-	// console.log("This lat: " + locLat);
-	// console.log("This Lng : " + locLng);
 	map.setZoom(15);
 	map.panTo(this.latLng);
 	google.maps.event.trigger(this.marker, 'click');
-};//end listViewClick
-
-
+}; //end listViewClick
 var koViewModel = function() {
 	var locLat = [];
 	var locLng = [];
-	// console.log(locLat);
 	var self = this;
 	var largeInfowindow = new google.maps.InfoWindow();
 	// Build "Place" objects out of raw place data. It is common to receive place
@@ -146,26 +137,17 @@ var koViewModel = function() {
 	locationData.forEach(function(place) {
 		self.allPlaces.push(new Place(place));
 	});
+	
 	// Style the markers a bit. This will be our listing marker icon.
 	// var defaultIcon = makeMarkerIcon('808080');
 	var defaultIcon = {
 		url: 'images/butter2.svg',
 	};
-	// var defaultIcon = butterIcon;
-	// Create a "highlighted location" marker color for when the user
-	// mouses over the marker.
-	// var highlightedIcon = makeMarkerIcon('f0560b');
+	
 	var highlightedIcon = {
 		url: 'images/butter.svg',
 	};
-	// var butterIcon = {
-	//   url: 'images/butter2.svg',
-	//   //state your size parameters in terms of pixels
-	//   size: new google.maps.Size(15, 20),
-	//   scale: 0.5,
-	//   scaledSize: new google.maps.Size(5, 30),
-	//   origin: new google.maps.Point(0,0)
-	//   };
+	
 	// Build Markers via the Maps API and place them on the map.
 	self.allPlaces.forEach(function(place) {
 		var markerOptions = {
@@ -174,7 +156,6 @@ var koViewModel = function() {
 			lat: place.latLng.lat,
 			lng: place.latLng.lng,
 			animation: google.maps.Animation.DROP,
-			// icon: butterIcon,
 			icon: defaultIcon,
 			title: place.locationName,
 			placeId: place.placeId,
@@ -188,60 +169,30 @@ var koViewModel = function() {
 			getPlacesDetails(this, largeInfowindow);
 			locLat = this.lat;
 			locLng = this.lng;
-			// console.log("This lat: " + this.lat);
-			// console.log("This Lng : " + this.lng);
+			var wikiTitle = document.getElementById('wikiTitle');
+			wikiTitle.textContent = (this.title);
 			var $wikiElem = $('#wikipedia-articles');
 			$wikiElem.text("");
 			var hashtag = locLat + '%7C' + locLng;
 			var completeWikiUrl = "https://en.wikipedia.org/w/api.php?action=query&format=json&list=geosearch&gscoord=" + hashtag + "&gsradius=10000&gslimit=5";
 			var _list = $('.link-list');
-
 			$.ajax({
-					url: completeWikiUrl,
-					dataType: "jsonp",
-					jsonp: "callback",
-					success: function( response ) {
-							// console.log(response);
-							// var articleList = response.query.geosearch[0];
-							// var articleList = response;
-							var articleList = response.query.geosearch;
-							// console.log(response.query.geosearch);
-							// console.log(listViewClick.locLat);
-							// console.log("This marker is : " + this.latLng.lat);
-							// console.log(articleList);
-							for (var i = 0; i < articleList.length; i++) {
-									var article = articleList[i];
-									// console.log(article);
-									//  console.log(listViewClick);
-									// self.allWikiArticles.push(article);
-									// var url = 'http://en.wikipedia.org/wiki/' + article;
-									// $wikiElem.append('<li><a href="' + url + '">' + article + '</a></li>');
-
-									allWikiArticles.push(articleList[i].title);
-									var title = articleList[i].title;
-// 									console.log(title);
-									// allWikiArticles.title(articleList[i].title);
-									// allWikiArticles.dist(articleList[i].dist);
-									//
-									// console.log(articleList[i].title);
-									// allWikiArticles['title'] = articleList[i].title;
-									// allWikiArticles.title = articleList[i].title;
-									allWikiArticles.title = (this.title= title);
-									console.log(allWikiArticles.title); //  document.getElementById("list-Wiki").innerHTML =article;
-
-									// $wikiElem.append('<li id="wikipedia-articles">'+
-									// 		'<p class="atractionTitle"><strong>' +response.query.geosearch[i].title+'</strong></p>'+
-									// 		'<p>' +'distance in meters: ' + response.query.geosearch[i].dist + '</p>'+
-									// '</li>'+'<hr>');
-
-									// self.allWikiArticles.push( response.query.geosearch[i].title);
-									// self.allWikiArticles.push(articleList);
-							}
-
-							// clearTimeout(wikiRequestTimeout);
-					}
-			});//end AJAX call
-		});
+				url: completeWikiUrl,
+				dataType: "jsonp",
+				jsonp: "callback",
+				  success: function( response ) {
+					  var articleList = response.query.geosearch;
+					  for (var i = 0; i < articleList.length; i++) {
+						  var article = articleList[i];
+						  self.allWikiArticles.push(article);  // push articles to observable array
+				  }
+				}, //end success function
+				error: function(response) {
+					console.log('Oops...API did not load');
+				}
+			}); //end AJAX call
+		}); //end place.marker.addListener
+		
 		// Two event listeners - one for mouseover, one for mouseout,
 		// to change the colors back and forth.
 		place.marker.addListener('mouseover', function() {
@@ -283,43 +234,18 @@ var koViewModel = function() {
 			place.marker.setVisible(true);
 		});
 	};
-
-
 	self.wikiArticles = ko.observableArray();
 	// self.allWikiArticles = ko.observableArray();
 	var allWikiArticles = [
-		title ='dog',
-		dogName2 ='dog2',
-
-		// console.log(self.allWikiArticles[0])
-		// console.log(this.allWikiArticles)
+		dogtitle = 'dog',
+		dogName2 = 'dog2',
 	];
-	// console.log(allWikiArticles);
-
 	self.allWikiArticles = ko.observableArray();
 	allWikiArticles.forEach(function(article) {
 		self.wikiArticles.push(article);
 	});
-		// console.log(this.wikiArticles[0]);
-
-
-
-
 }; //end koViewModel
 
-
-// var viewModel = {
-//     firstName : ko.observable("Bert"),
-//     lastName : ko.observable("Smith"),
-//     pets : ko.observableArray(["Cat", "Dog", "Fish"]),
-//     type : "Customer"
-// };
-// viewModel.hasALotOfPets = ko.computed(function() {
-//     return this.pets().length > 2;
-// }, viewModel);
-
-
-// console.log(link);
 function Place(dataObj) {
 	this.placeId = dataObj.id;
 	this.locationName = dataObj.locationName;
@@ -328,7 +254,6 @@ function Place(dataObj) {
 	// marker:
 	this.marker = null;
 }
-
 var mapInit = function() {
 	map = new google.maps.Map(document.getElementById('map'), {
 		center: {
@@ -345,14 +270,12 @@ var mapInit = function() {
 	ko.applyBindings(new koViewModel(googleMap, locationData));
 };
 var googleError = function(onerror) {
-	var errorSVG = document.getElementById("errorDiv");
 	//  Mozilla recommendes you not use innerHTML when inserting plain text; instead, use node.textContent. This doesn't interpret the passed content as HTML, but instead inserts it as raw text.
 	//https://developer.mozilla.org/en-US/docs/Web/API/Element/innerHTML
 	errorSVG.textContent = ('Oops...Map did not load');
 	console.log('Oops...map did not load');
 	errorSVG.innerHTML = "<img src='images/noMap.svg' alt='Map failed to load'/>";
 };
-
 
 function getPlacesDetails(marker, infowindow) {
 	var service = new google.maps.places.PlacesService(map);
@@ -380,22 +303,18 @@ function getPlacesDetails(marker, infowindow) {
 				innerHTML += '<br><br><img src="' + place.photos[0].getUrl({
 					maxHeight: 100,
 					maxWidth: 200
-				}) +'">'+'<p>hover over image</p>';
+				}) + '">' + '<p>hover over image</p>';
 			}
 			innerHTML += '</div>';
 			infowindow.setContent(innerHTML);
 			infowindow.open(map, marker);
-
 			// trying to prevent infowindow getting clipped: http://www.emanueletessore.com/google-maps-balloon-position/
 			// infowindow.addListener('tilesloaded', map, function() {
 			// 	infowindow.open(map,marker);
 			// 	});
-
-				// google.maps.event.addListener(map, 'tilesloaded', function() {
-				// 	infowindow.open(map,marker);
-				// 	});
-
-
+			// google.maps.event.addListener(map, 'tilesloaded', function() {
+			// 	infowindow.open(map,marker);
+			// 	});
 			// Make sure the marker property is cleared if the infowindow is closed.
 			infowindow.addListener('closeclick', function() {
 				infowindow.marker = null;
@@ -408,7 +327,9 @@ function getPlacesDetails(marker, infowindow) {
 			marker.setAnimation(null);
 		} else {
 			marker.setAnimation(google.maps.Animation.BOUNCE);
+			setTimeout(function() {
+				marker.setAnimation(null);
+			}, 1500);
 		}
 	}
-
 }
