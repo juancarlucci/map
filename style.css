@@ -108,6 +108,11 @@ hr:last-child {
   background-image: none;
 }
 
+br:last-child {
+  display: none;
+  background-image: none;
+}
+
 #toggleList {
   background-color: #fff;
 height: 30px;
