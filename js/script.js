@@ -58,6 +58,7 @@ var styles = [{
 		}, {
 			"saturation": -28
 		},
+		// { "color": "#32302f" },
 		{
 			"color": "#e5e3df"
 		}
@@ -67,6 +68,7 @@ var styles = [{
 	"stylers": [{
 			"visibility": "on"
 		},
+		// { "color": "#808080" },
 		{
 			"color": "#e5e3df"
 		}
@@ -114,15 +116,20 @@ var styles = [{
 		"visibility": "on"
 	}]
 }];
-
 self.listViewClick = function(marker, infowindow) {
+	// console.log(Place);
+	// console.log("This is working with: " + this.locationName);
+	// console.log("This marker is : " + this.latLng.lat);
+	// var locLat = this.latLng.lat;
 	locLat = this.latLng.lat;
 	locLng = this.latLng.lng;
+	// name = title;
+	// console.log("This name: " + name);
+	// console.log("This Lng : " + locLng);
 	map.setZoom(15);
 	map.panTo(this.latLng);
 	google.maps.event.trigger(this.marker, 'click');
 }; //end listViewClick
-
 var koViewModel = function() {
 	var locLat = [];
 	var locLng = [];
@@ -143,11 +150,21 @@ var koViewModel = function() {
 	var defaultIcon = {
 		url: 'images/butter2.svg',
 	};
-
+	// var defaultIcon = butterIcon;
+	// Create a "highlighted location" marker color for when the user
+	// mouses over the marker.
+	// var highlightedIcon = makeMarkerIcon('f0560b');
 	var highlightedIcon = {
 		url: 'images/butter.svg',
 	};
-	
+	// var butterIcon = {
+	//   url: 'images/butter2.svg',
+	//   //state your size parameters in terms of pixels
+	//   size: new google.maps.Size(15, 20),
+	//   scale: 0.5,
+	//   scaledSize: new google.maps.Size(5, 30),
+	//   origin: new google.maps.Point(0,0)
+	//   };
 	// Build Markers via the Maps API and place them on the map.
 	self.allPlaces.forEach(function(place) {
 		var markerOptions = {
@@ -156,6 +173,7 @@ var koViewModel = function() {
 			lat: place.latLng.lat,
 			lng: place.latLng.lng,
 			animation: google.maps.Animation.DROP,
+			// icon: butterIcon,
 			icon: defaultIcon,
 			title: place.locationName,
 			placeId: place.placeId,
@@ -169,8 +187,28 @@ var koViewModel = function() {
 			getPlacesDetails(this, largeInfowindow);
 			locLat = this.lat;
 			locLng = this.lng;
+			// console.log(locLat);
+			// // var attraction1 = new google.maps.LatLng(locLat, locLng);
+			// // console.log(attraction1);
+			//  var amsterdam = new google.maps.LatLng(37.826058,-122.253213);
+			//  var london = new google.maps.LatLng(37.759191, -122.411053);
+			//  //
+			//  var mapCanvas = document.getElementById("map");
+			// //  var mapOptions = {center: amsterdam, zoom: 4};
+			//  var map = new google.maps.Map(mapCanvas);
+			//  //
+			//  var flightPath = new google.maps.Polyline({
+			//    path: [london, amsterdam],
+			//    strokeColor: "#0000FF",
+			//    strokeOpacity: 0.8,
+			//    strokeWeight: 2
+			//  });
+			//  flightPath.setMap(map);
+			// self.allWikiTitles.push = (this.title);
 			var wikiTitle = document.getElementById('wikiTitle');
 			wikiTitle.textContent = (this.title);
+			// console.log("This lat: " + this.lat);
+			// console.log("This Lng : " + this.lng);
 			var $wikiElem = $('#wikipedia-articles');
 			$wikiElem.text("");
 			var hashtag = locLat + '%7C' + locLng;
@@ -181,14 +219,50 @@ var koViewModel = function() {
 				dataType: "jsonp",
 				jsonp: "callback",
 				success: function(response) {
+					// console.log(response);
+					// var articleList = response.query.geosearch[0];
+					// var articleList = response;
 					var articleList = response.query.geosearch;
+					// console.log(response.query.geosearch);
+					// console.log(listViewClick.locLat);
+					// console.log("This marker is : " + this.latLng.lat);
+					// console.log(articleList);
 					for(var i = 0; i < articleList.length; i++) {
 						var article = articleList[i];
+						// var wikiLat = (article.lat);
+						// var wikiLng = (article.lon);
+						// var wikiLatLng = ('article.lat' + 'article.lon');
+						// console.log(wikiLatLng);
+						// console.log(wikiLat);
+						// console.log(wikiLng);
+						//  console.log(listViewClick);
+						// self.allWikiArticles.push(article);
+						// var url = 'http://en.wikipedia.org/wiki/' + article;
+						// $wikiElem.append('<li><a href="' + url + '">' + article + '</a></li>');
+						// allWikiArticles.push(articleList[i].title);
+						// var title = articleList[i].title;
 						self.allWikiArticles.push(article); // push articles to observable array
+						// console.log(title);
+						// allWikiArticles.title(articleList[i].title);
+						// allWikiArticles.dist(articleList[i].dist);
+						//
+						// console.log(articleList[i].title);
+						// allWikiArticles['title'] = articleList[i].title;
+						// allWikiArticles.title = articleList[i].title;
+						// allWikiArticles.title = (this.title= title);
+						// console.log(allWikiArticles.title); //  document.getElementById("list-Wiki").innerHTML =article;
+						// $wikiElem.append('<li id="wikipedia-articles">'+
+						// 		'<p class="atractionTitle"><strong>' +response.query.geosearch[i].title+'</strong></p>'+
+						// 		'<p>' +'distance in meters: ' + response.query.geosearch[i].dist + '</p>'+
+						// '</li>'+'<hr>');
+						// self.allWikiArticles.push( response.query.geosearch[i].title);
+						// self.allWikiArticles.push(articleList);
 					}
-					
+					// clearTimeout(wikiRequestTimeout);
 				}, //end success function
 				error: function(response) {
+					// console.log('error occured loading API');
+					// errorSVG.textContent = ('Oops...Map did not load');
 					console.log('Oops...API did not load');
 				}
 			}); //end AJAX call
@@ -240,14 +314,29 @@ var koViewModel = function() {
 		dogtitle = 'dog',
 		dogName2 = 'dog2',
 	];
-
+	// var allWikiTitles =[];
+	// console.log(allWikiArticles);
 	self.allWikiArticles = ko.observableArray();
 	allWikiArticles.forEach(function(article) {
 		self.wikiArticles.push(article);
 	});
-
+	// console.log(this.wikiArticles[0]);
+	// self.allWikiTitles = ko.observableArray();
+	// 	allWikiTitles.forEach(function(title) {
+	// 		self.wikiArticles.push(title);
+	// 	});
+	// console.log(allWikiTitles);
 }; //end koViewModel
-
+// var viewModel = {
+//     firstName : ko.observable("Bert"),
+//     lastName : ko.observable("Smith"),
+//     pets : ko.observableArray(["Cat", "Dog", "Fish"]),
+//     type : "Customer"
+// };
+// viewModel.hasALotOfPets = ko.computed(function() {
+//     return this.pets().length > 2;
+// }, viewModel);
+// console.log(link);
 function Place(dataObj) {
 	this.placeId = dataObj.id;
 	this.locationName = dataObj.locationName;
@@ -279,7 +368,46 @@ var googleError = function(onerror) {
 	console.log('Oops...map did not load');
 	errorSVG.innerHTML = "<img src='images/noMap.svg' alt='Map failed to load'/>";
 };
-
+// function populateInfoWindow(marker, infowindow) {
+// 	// Check to make sure the infowindow is not already opened on this marker.
+// 	if(infowindow.marker != marker) {
+// 		// Clear the infowindow content to give the streetview time to load.
+// 		infowindow.setContent('');
+// 		infowindow.marker = marker;
+// 		// Make sure the marker property is cleared if the infowindow is closed.
+// 		infowindow.addListener('closeclick', function() {
+// 			infowindow.marker = null;
+// 		});
+// 		var streetViewService = new google.maps.StreetViewService();
+// 		var radius = 50;
+// 		// In case the status is OK, which means the pano was found, compute the
+// 		// position of the streetview image, then calculate the heading, then get a
+// 		// panorama from that and set the options
+// 		function getStreetView(data, status) {
+// 			if(status == google.maps.StreetViewStatus.OK) {
+// 				// var nearStreetViewLocation = data.location.latLng;
+// 				var nearStreetViewLocation = data.location.latLng;
+// 				var heading = google.maps.geometry.spherical.computeHeading(nearStreetViewLocation, marker.position);
+// 				infowindow.setContent('<div>' + marker.title + '</div><div id="pano"></div>');
+// 				var panoramaOptions = {
+// 					position: nearStreetViewLocation,
+// 					pov: {
+// 						heading: heading,
+// 						pitch: 30
+// 					}
+// 				};
+// 				var panorama = new google.maps.StreetViewPanorama(document.getElementById('pano'), panoramaOptions);
+// 			} else {
+// 				infowindow.setContent('<div>' + marker.title + '</div>' + '<div>No Street View Found</div>');
+// 			}
+// 		}
+// 		// Use streetview service to get the closest streetview image within
+// 		// 50 meters of the markers position
+// 		streetViewService.getPanoramaByLocation(marker.position, radius, getStreetView);
+// 		// Open the infowindow on the correct marker.
+// 		infowindow.open(map, marker);
+// 	}
+// }
 function getPlacesDetails(marker, infowindow) {
 	var service = new google.maps.places.PlacesService(map);
 	service.getDetails({
