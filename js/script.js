@@ -40,7 +40,6 @@ var locationData = [{
 	},
 	id: 'ChIJ78j3OdSAhYAR_nZU8ILRNUU'
 }];
-
 var styles = [{
 	"elementType": "labels.text.fill",
 	"stylers": [{
@@ -123,9 +122,11 @@ self.listViewClick = function(marker, infowindow) {
 	map.panTo(this.latLng);
 	google.maps.event.trigger(this.marker, 'click');
 }; //end listViewClick
+
 var koViewModel = function() {
 	var locLat = [];
 	var locLng = [];
+	// console.log(locLat);
 	var self = this;
 	var largeInfowindow = new google.maps.InfoWindow();
 	// Build "Place" objects out of raw place data. It is common to receive place
@@ -137,13 +138,12 @@ var koViewModel = function() {
 	locationData.forEach(function(place) {
 		self.allPlaces.push(new Place(place));
 	});
-	
 	// Style the markers a bit. This will be our listing marker icon.
 	// var defaultIcon = makeMarkerIcon('808080');
 	var defaultIcon = {
 		url: 'images/butter2.svg',
 	};
-	
+
 	var highlightedIcon = {
 		url: 'images/butter.svg',
 	};
@@ -180,19 +180,19 @@ var koViewModel = function() {
 				url: completeWikiUrl,
 				dataType: "jsonp",
 				jsonp: "callback",
-				  success: function( response ) {
-					  var articleList = response.query.geosearch;
-					  for (var i = 0; i < articleList.length; i++) {
-						  var article = articleList[i];
-						  self.allWikiArticles.push(article);  // push articles to observable array
-				  }
+				success: function(response) {
+					var articleList = response.query.geosearch;
+					for(var i = 0; i < articleList.length; i++) {
+						var article = articleList[i];
+						self.allWikiArticles.push(article); // push articles to observable array
+					}
+					
 				}, //end success function
 				error: function(response) {
 					console.log('Oops...API did not load');
 				}
 			}); //end AJAX call
 		}); //end place.marker.addListener
-		
 		// Two event listeners - one for mouseover, one for mouseout,
 		// to change the colors back and forth.
 		place.marker.addListener('mouseover', function() {
@@ -240,10 +240,12 @@ var koViewModel = function() {
 		dogtitle = 'dog',
 		dogName2 = 'dog2',
 	];
+
 	self.allWikiArticles = ko.observableArray();
 	allWikiArticles.forEach(function(article) {
 		self.wikiArticles.push(article);
 	});
+
 }; //end koViewModel
 
 function Place(dataObj) {
@@ -270,6 +272,7 @@ var mapInit = function() {
 	ko.applyBindings(new koViewModel(googleMap, locationData));
 };
 var googleError = function(onerror) {
+	// var errorSVG = document.getElementById("errorDiv");
 	//  Mozilla recommendes you not use innerHTML when inserting plain text; instead, use node.textContent. This doesn't interpret the passed content as HTML, but instead inserts it as raw text.
 	//https://developer.mozilla.org/en-US/docs/Web/API/Element/innerHTML
 	errorSVG.textContent = ('Oops...Map did not load');
