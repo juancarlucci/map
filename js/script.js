@@ -171,6 +171,8 @@ var koViewModel = function() {
 			getPlacesDetails(this, largeInfowindow);
 			locLat = this.lat;
 			locLng = this.lng;
+			var wikiTitle = document.getElementById('wikiTitle');
+			wikiTitle.textContent = (this.title);
 			var $wikiElem = $('#wikipedia-articles');
 			$wikiElem.text("");
 			var hashtag = locLat + '%7C' + locLng;
