@@ -219,7 +219,7 @@ var koViewModel = function() {
 
 									allWikiArticles.push(articleList[i].title);
 									var title = articleList[i].title;
-									console.log(title);
+// 									console.log(title);
 									// allWikiArticles.title(articleList[i].title);
 									// allWikiArticles.dist(articleList[i].dist);
 									//
