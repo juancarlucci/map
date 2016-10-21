@@ -205,8 +205,6 @@ var koViewModel = function() {
 			//  });
 			//  flightPath.setMap(map);
 			// self.allWikiTitles.push = (this.title);
-			var wikiTitle = document.getElementById('wikiTitle');
-			wikiTitle.textContent = (this.title);
 			// console.log("This lat: " + this.lat);
 			// console.log("This Lng : " + this.lng);
 			var $wikiElem = $('#wikipedia-articles');
