@@ -36,26 +36,35 @@ input {
   top: 10%;
   height: 40px;
   width: 80%;
-  font-size: 15px;
+  font-size: 10px;
+  text-align: center;
   /*z-index: 1000;*/
 }
 
 #list-view {
   /*position: fixed;*/
-  top: 100px;
-  right: 20px;
+  top: 10px;
+  right: 10px;
   width: 100%;
-  background-color: #fff;
+  background-color: #f0560b;
   margin: 0;
-  padding: 0;
+  padding: 10px;
   /*z-index: 110;*/
+}
+
+#wikipedia-articles {
+  padding: 0px;
+  text-align: center;
+}
+.atractionTitle {
+  font-weight: bold;
 }
 
 h1 {
   font-size: 30px;
   margin: 0 0 10px 0;
   text-align: center;
-    font-family: 'Poiret One', cursive;
+  font-family: 'Poiret One', cursive;
 }
 
 h2 {
@@ -64,11 +73,26 @@ h2 {
 }
 
 li {
+  margin: 1px;
   margin-left: 0px;
   font-family: 'Poiret One',
-  padding: 2px 0;
+  padding: 10px 0;
+  padding-top: 20px;
   font: 12px;
   list-style-type: none;
+  text-align: center;
+}
+
+
+hr {
+  border : 0;
+  height: 1px;
+  background-image: linear-gradient(to right, rgba(82, 82, 82, 0), rgba(82, 82, 82, 0.75), rgba(82, 82, 82, 0));*/
+}
+
+hr:last-child {
+  display: none;
+  background-image: none;
 }
 
 #toggleList {
@@ -223,9 +247,6 @@ visibility: visible;
     }
 }
 .info-windows{
-		/*width: 144px;
-		height:106px;
-		color: #ffedc8;*/
   	font-family: 'Raleway', sans-serif;
 		max-width: none;
 		padding:0px;
@@ -239,15 +260,9 @@ visibility: visible;
     -moz-filter: grayscale(1);
     -o-filter: grayscale(1);
     -ms-filter: grayscale(1);
+    font-size: 0.2em;
 	}
-  /*.grayscale img
-  {
-  	filter: grayscale(1);
-  	-webkit-filter: grayscale(1);
-  	-moz-filter: grayscale(1);
-  	-o-filter: grayscale(1);
-  	-ms-filter: grayscale(1);
-  }*/
+
 /*thanks to https://paulund.co.uk/css-filter*/
   .info-windows img:hover {
   	filter: grayscale(0);
