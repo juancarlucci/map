@@ -13,7 +13,11 @@
 	<link href="https://fonts.googleapis.com/css?family=Poiret+One" rel="stylesheet"> </head>
 
 <body>
-<!-- 	<div id="wrapper"> -->
+	<div id="wrapper">
+		<!-- <div>
+            <div class="btn btn-default" id="toggleList" onclick="toggleSidebar()">Toggle List
+            </div>
+        </div> -->
 		<!-- Start wrapping the sidebar -->
 		<div id="sidebar-wrapper">
 			<div>
@@ -29,53 +33,60 @@
 				<div class="places">
 					<ul id="list-view" data-bind="foreach: visiblePlaces">
 						<li id="restaurant" data-bind="text: locationName, click: listViewClick"></li>
-					</ul>
+          </ul>
 				</div>
 				<div class="wikiArticlesList">
 					<h2 class="wikipedia-header">Cools things near: </h2>
-					<h2 class="wikipedia-header">:</h2>
+					<h2 class="wikipedia-header" id="wikiTitle"></h2>
 					<ul id="wikipedia-articles" data-bind="foreach: allWikiArticles">
 						<li data-bind="text: title"></li>
+						<!-- <li data-bind="text: title, click: listViewClick"></li> -->
 					</ul>
 				</div>
-				<!--list-->
-				<div class="butterArticlesList">
-					<h1>Why Butter?</h1>
-					<p>It's just awesome! And much misunderstood. But still delicious and supper good!</p>
-					<p> Heart disease was rare in America at the turn of the century. Between 1920 and 1960, the incidence of heart disease rose precipitously to become America’s number one killer. During the same period butter consumption plummeted from eighteen pounds per person per year to four. It doesn’t take a Ph.D. in statistics to conclude that butter is not a cause. -Weston Price Foundation </p>
-				</div>
+				<!-- <div class="wikipedia-container">
+                    <h3 id="wikipedia-header" data-bind="foreach:getPlacesDetails">Nearby Attractions<span id="wikiTitle"></span></h3>
+                    <ul id="wikipedia-articles">Choose from the above restaurants to see what awesome attractions are nearby!
+                    <li data-bind="text: wikipedia-articles, click: listViewClick"></li><hr>
+                    </ul>
+                </div> -->
+        </div> <!-- end "list" -->
+			<div class="butterArticlesList">
+				<h1>Why Butter?</h1>
+				<p>It's just awesome! And much misunderstood. But still delicious and supper good!</p>
+				<p> Heart disease was rare in America at the turn of the century. Between 1920 and 1960, the incidence of heart disease rose precipitously to become America’s number one killer. During the same period butter consumption plummeted from eighteen pounds per person per year to four. It doesn’t take a Ph.D. in statistics to conclude that butter is not a cause. -Weston Price Foundation </p>
 			</div>
-			<!--map container -->
-			<div id="page_content_wrapper">
-				<div class="map" id="map">
-					<div id=errorDiv></div>
-				</div>
+		</div> <!-- end sidebar-->
+		<!--map container -->
+		<div id="page_content_wrapper">
+			<div class="map" id="map">
+				<div id=errorDiv></div>
 			</div>
-			<script src="js/script.js">
-			</script>
-			<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
-			<!-- Knockout request -->
-			<script src="https://cdnjs.cloudflare.com/ajax/libs/knockout/3.3.0/knockout-min.js">
-			</script>
-			<!-- Map request -->
-			<script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyACyB_cnxMnvemYkU_zbe7bqKnHQDQY79k&libraries=places,geometry,drawing&v=3.26&callback=mapInit" onerror="googleError()">
-			</script>
-			<!-- knockout-->
-			<!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/knockout/3.3.0/knockout-min.js">
-        </script> -->
-			<script>
-			function toggleSidebar() {
-				var x = document.getElementById('sidebar-wrapper');
-				if(x.style.visibility === 'hidden') {
-					x.style.visibility = 'visible';
-					// x.textContent= 'hide';
-				} else {
-					x.style.visibility = 'hidden';
-					// x.textContent ='show';
-				}
-			}
-			</script>
 		</div>
+    <script src="js/script.js">
+		</script>
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+		<!-- Knockout request -->
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/knockout/3.3.0/knockout-min.js">
+		</script>
+		<!-- Map request -->
+		<script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyACyB_cnxMnvemYkU_zbe7bqKnHQDQY79k&libraries=places,geometry,drawing&v=3.26&callback=mapInit" onerror="googleError()">
+		</script>
+		<!-- knockout-->
+		<!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/knockout/3.3.0/knockout-min.js">
+        </script> -->
+		<script>
+		function toggleSidebar() {
+			var x = document.getElementById('sidebar-wrapper');
+			if(x.style.visibility === 'hidden') {
+				x.style.visibility = 'visible';
+				// x.textContent= 'hide';
+			} else {
+				x.style.visibility = 'hidden';
+				// x.textContent ='show';
+			}
+		}
+		</script>
+  </div>
 </body>
 
 </html>
