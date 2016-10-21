@@ -32,22 +32,27 @@
             </h1>
                     <h2 class="title">Restaurants that use real butter:
             </h2>
-                    <input type="search" placeholder="search restaurants..." data-bind="textInput: userInput, event: {keyup: filterMarkers}">
+                    <input type="search" placeholder="search within these restaurants..." data-bind="textInput: userInput, event: {keyup: filterMarkers}">
                 </div>
                 <div class="places">
                     <ul id="list-view" data-bind="foreach: visiblePlaces">
-                      <li data-bind="text: locationName, click: listViewClick"></li>
+                      <li id="restaurant" data-bind="text: locationName, click: listViewClick"></li><br><hr>
                     </ul>
                 </div>
-                <!-- <div class="wikiArticlesList">
-                    <ul id="list-Wiki"  data-bind="foreach: wikiData">
-                      <li data-bind="text: pageid, click: listViewClick"></li>
+                <div class="wikiArticlesList">
+                    <h3 id="wikipedia-header">Nearby Attractions</h3>
+                    <ul id="wikipedia-articles" data-bind="foreach: allWikiArticles">
+                      <li data-bind="text: title"</li>
+                      <!-- <li data-bind="text: title, click: listViewClick"></li> -->
+                    </ul>
+
+                </div>
+                <!-- <div class="wikipedia-container">
+                    <h3 id="wikipedia-header">Nearby Attractions(<span data-bind="text: s"></span>)</h3>
+                    <ul id="wikipedia-articles">Choose from the above restaurants to see what awesome attractions are nearby!
+                    <li data-bind="text: wikipedia-articles, click: listViewClick"></li><hr>
                     </ul>
                 </div> -->
-                <div class="wikipedia-container">
-                    <h3 id="wikipedia-header">Nearby Attractions</h3>
-                    <ul id="wikipedia-articles">Choose from the above restaurants to see what awesome attractions are nearby!</ul>
-                </div>
             </div>
             <!--list-->
             <div>
