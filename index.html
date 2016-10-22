@@ -5,7 +5,7 @@
 	<meta charset="utf-8">
 	<meta name="description" content="">
 	<meta name="keywords" content="">
-	<meta name="author" content="Juan Carlos">
+	<meta name="author" content="Juan Carlos Collins">
 	<title>Neighborhood Map </title>
 	<link href="style.css" rel="stylesheet">
 	<!-- Fonts -->
@@ -14,10 +14,6 @@
 
 <body>
 	<div id="wrapper">
-		<!-- <div>
-            <div class="btn btn-default" id="toggleList" onclick="toggleSidebar()">Toggle List
-            </div>
-        </div> -->
 		<!-- Start wrapping the sidebar -->
 		<div id="sidebar-wrapper">
 			<div>
@@ -25,31 +21,22 @@
 			</div>
 			<div class="list">
 				<div class="search">
-					<h1 class="topTitle">Butter Map!!!
-            </h1>
-					<h2 class="title">Restaurants that use real butter:
-            </h2>
+					<h1 class="topTitle">Butter Map!!!</h1>
+					<h2 class="title">Restaurants that use real butter:</h2>
 					<input type="search" placeholder="search within these restaurants..." data-bind="textInput: userInput, event: {keyup: filterMarkers}"> </div>
 				<div class="places">
 					<ul id="list-view" data-bind="foreach: visiblePlaces">
 						<li id="restaurant" data-bind="text: locationName, click: listViewClick"></li>
-          </ul>
+          			</ul>
 				</div>
 				<div class="wikiArticlesList">
 					<h2 class="wikipedia-header">Cools things near: </h2>
 					<h2 class="wikipedia-header" id="wikiTitle"></h2>
 					<ul id="wikipedia-articles" data-bind="foreach: allWikiArticles">
 						<li data-bind="text: title"></li>
-						<!-- <li data-bind="text: title, click: listViewClick"></li> -->
 					</ul>
 				</div>
-				<!-- <div class="wikipedia-container">
-                    <h3 id="wikipedia-header" data-bind="foreach:getPlacesDetails">Nearby Attractions<span id="wikiTitle"></span></h3>
-                    <ul id="wikipedia-articles">Choose from the above restaurants to see what awesome attractions are nearby!
-                    <li data-bind="text: wikipedia-articles, click: listViewClick"></li><hr>
-                    </ul>
-                </div> -->
-        </div> <!-- end "list" -->
+			</div> <!-- end "list" -->
 			<div class="butterArticlesList">
 				<h1>Why Butter?</h1>
 				<p>It's just awesome! And much misunderstood. But still delicious and supper good!</p>
@@ -62,7 +49,8 @@
 				<div id=errorDiv></div>
 			</div>
 		</div>
-    <script src="js/script.js">
+		<!-- Scripts-->
+    	<script src="js/script.js">
 		</script>
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
 		<!-- Knockout request -->
