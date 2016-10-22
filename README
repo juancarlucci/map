@@ -1,12 +1,13 @@
 ## Neighborhood Map project
 
-
-
 ### What I learned doing the map project:
 
 1. How to build AJAX calls.
 2. Javascript Design Patterns, including basic refactoring and separation of concerns. 
 3. Goole Maps API.
+4. Graceful error handling.
+5. How to style infowindows, markers and map.
+6. Asynchronous requests.
 
 ### How to use the map
 
