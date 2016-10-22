@@ -8,6 +8,12 @@
 2. Javascript Design Patterns, including basic refactoring and separation of concerns. 
 3. Goole Maps API.
 
+### How to use the map
+
+You will see a map of the San Francisco Bay Area, with markers for five restaruants that use real butter in their menu.
+On the left hand panel you will find the list of restaurants, a search bar, a "Cool things near:" section, and some comments on the goodness of butter.
+Click on the marker or the list of five restaruants to get more detaield information via an infowindow (google API).
+You will also see a section on the left panel that shows "Cool things near:" your selected restaurant. This is done via a wikipedia API
 
 ### Files included: 
 
