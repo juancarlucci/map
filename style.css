@@ -34,28 +34,51 @@ input {
   /*position: fixed;*/
   left: 20px;
   top: 10%;
-  height: 40px;
-  width: 80%;
-  font-size: 15px;
+  /*height: 40px;*/
+  width: 100%;
+  font-size: .75em;
+  text-align: center;
   /*z-index: 1000;*/
+}
+
+.list {
+  cursor:pointer;
 }
 
 #list-view {
   /*position: fixed;*/
-  top: 100px;
-  right: 20px;
+  top: 10px;
+  right: 10px;
   width: 100%;
-  background-color: #fff;
+  background-color: #f0560b;
   margin: 0;
-  padding: 0;
+  padding: 10px;
   /*z-index: 110;*/
+}
+
+.wikiArticlesList {
+  margin-top: 10px;
+  text-align: center;
+}
+.butterArticlesList {
+  margin: 10px;
+}
+
+#wikipedia-articles {
+  padding: 10px;
+  text-align: center;
+}
+.wikipedia-header {
+  padding: 0;
+  margin: 0;
+
 }
 
 h1 {
   font-size: 30px;
   margin: 0 0 10px 0;
   text-align: center;
-    font-family: 'Poiret One', cursive;
+  font-family: 'Poiret One', cursive;
 }
 
 h2 {
@@ -64,11 +87,30 @@ h2 {
 }
 
 li {
+  margin: 1px;
   margin-left: 0px;
-  /*marin: auto:*/
-  padding: 2px 0;
-  font: 12px sans-serif;
+  font-family: 'Poiret One',
+  padding:20px;
+  font: 12px;
   list-style-type: none;
+  text-align: center;
+}
+
+
+hr {
+  border : 0;
+  height: 1px;
+  background-image: linear-gradient(to right, rgba(82, 82, 82, 0), rgba(82, 82, 82, 0.75), rgba(82, 82, 82, 0));*/
+}
+
+hr:last-child {
+  display: none;
+  background-image: none;
+}
+
+br:last-child {
+  display: none;
+  background-image: none;
 }
 
 #toggleList {
@@ -84,14 +126,8 @@ visibility: visible;
 }
 /* On small screens, set height to 'auto' for sidenav and grid */
 @media screen and (max-width: 300px) {
-  #toggleList {
-  visibility: visible;
-  /*position: fixed;*/
-  /*z-index: 0;*/
+
   }
-
-}
-
 
 #wrapper {
     display: table-row;
@@ -112,7 +148,7 @@ visibility: visible;
     position: fixed;
     z-index: 1000;
     left: 250px;
-    width: 0;
+    width: 100%;
     height: 100%;
     margin-left: -250px;
     overflow-y: auto;
@@ -121,10 +157,6 @@ visibility: visible;
     -moz-transition: all 0.2s ease;
     -o-transition: all 0.2s ease;
     transition: all 0.2s ease;
-}
-
-#wrapper.toggled #sidebar-wrapper {
-    width: 250px;
 }
 
 #page-content-wrapper {
@@ -197,11 +229,7 @@ visibility: visible;
 
 @media(min-width:768px) {
     #wrapper {
-        padding-left: 250px;
-    }
-
-    #wrapper.toggled {
-        padding-left: 0;
+        padding-left: 150px;
     }
 
     #sidebar-wrapper {
@@ -211,14 +239,42 @@ visibility: visible;
     #wrapper.toggled #sidebar-wrapper {
         width: 0;
     }
-
-    #page-content-wrapper {
-        padding: 20px;
-        position: relative;
-    }
-
-    #wrapper.toggled #page-content-wrapper {
-        position: relative;
-        margin-right: 0;
-    }
 }
+
+.info-windows{
+		/*width: 144px;
+		height:106px;
+		color: #ffedc8;*/
+  	font-family: 'Raleway', sans-serif;
+		max-width: none;
+		padding:0px;
+		margin:0px;
+	}
+	.info-windows img{
+		padding:10px;
+		margin:0px;
+    filter: grayscale(1);
+    -webkit-filter: grayscale(1);
+    -moz-filter: grayscale(1);
+    -o-filter: grayscale(1);
+    -ms-filter: grayscale(1);
+    font-size: 0.2em;
+	}
+
+/*thanks to https://paulund.co.uk/css-filter*/
+  .info-windows img:hover {
+  	filter: grayscale(0);
+  	-webkit-filter: grayscale(0);
+  	-moz-filter: grayscale(0);
+  	-o-filter: grayscale(0);
+  	-ms-filter: grayscale(0);
+    transform: rotateY(360deg);
+    -webkit-transform: rotateY(180deg);
+    transition-duration: 1.5s;
+    -webkit-transition-duration:1s;
+    filter: saturate(300%);
+    -webkit-filter: saturate(300%);
+    -moz-filter: saturate(300%);
+    -o-filter: saturate(300%);
+    -ms-filter: saturate(300%);
+  }
