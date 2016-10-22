@@ -18,5 +18,15 @@
 * and some images in the images directory.
 
 HOW TO RUN
-Download the files and open the index.html file
+Download the files and open the index.html file OR
+Click on this link: https://juancarlucci.github.io/map/
 
+Special thanks to all the people who helped in this project:
+The forum staff and contributors: sarah_m, Udayan, David Karol, Andrew Roy Chen, mcs, JohnMav, and many students. Great comments and excellent posts!
+Endless people at Stackoverflow
+
+infowindow sytle: http://demo-ee.com/index.php/examples/view/pink-styled-google-maps-with-custom-infowindows
+infowindow image style, filters: https://paulund.co.uk/css-filter 
+http://stackoverflow.com/questions/36284538/how-rotate-image-with-css-or-javascript
+http://www.cssportal.com/blog/style-hr-tag-with-css/
+http://stackoverflow.com/questions/33730906/how-to-remove-border-for-the-last-div-with-a-particular-class-name-last-child
