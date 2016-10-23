@@ -21,13 +21,15 @@
 			</div>
 			<div class="list">
 				<div class="search">
-					<h1 class="topTitle">Butter Map!!!</h1>
-					<h2 class="title">Restaurants that use real butter:</h2>
-					<input type="search" placeholder="search within these restaurants..." data-bind="textInput: userInput, event: {keyup: filterMarkers}"> </div>
-				<div class="places">
-					<ul id="list-view" data-bind="foreach: visiblePlaces">
-						<li id="restaurant" data-bind="text: locationName, click: listViewClick"></li>
-          			</ul>
+					<div id="circularTitle">
+						<h1 class="topTitle">BUTTER MAP</h1>
+						<p class="title">RESTAURANTS THAT USE REAL BUTTER</p>
+					</div>
+						<input type="search" placeholder="search within these restaurants..." data-bind="textInput: userInput, event: {keyup: filterMarkers}"> </div>
+					<div class="places">
+						<ul id="list-view" data-bind="foreach: visiblePlaces">
+							<li id="restaurant" data-bind="text: locationName, click: listViewClick"></li>
+					</ul>
 				</div>
 				<div class="wikiArticlesList">
 				  <h2 class="wikipedia-header" id="wikiTitle2"></h2>
