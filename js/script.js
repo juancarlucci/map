@@ -142,11 +142,11 @@ var koViewModel = function() {
 	// Style the markers a bit. This will be our listing marker icon.
 	// var defaultIcon = makeMarkerIcon('808080');
 	var defaultIcon = {
-		url: 'images/butter2.svg',
+		url: 'images/butter.png',
 	};
 
 	var highlightedIcon = {
-		url: 'images/butter.svg',
+		url: 'images/butter2.png',
 	};
 
 	// Build Markers via the Maps API and place them on the map.
