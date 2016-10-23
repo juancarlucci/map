@@ -119,6 +119,8 @@ var styles = [{
 self.listViewClick = function(marker, infowindow) {
 	locLat = this.latLng.lat;
 	locLng = this.latLng.lng;
+	var Cool = document.getElementById('wikiTitle2');
+	Cool.textContent = ("Cool things near");
 	map.setZoom(15);
 	map.panTo(this.latLng);
 	google.maps.event.trigger(this.marker, 'click');
@@ -189,6 +191,7 @@ var koViewModel = function() {
 						self.allWikiArticles.push(article); // push articles to observable array
 					
 					}
+					var attribution = document.getElementById("attribution").innerHTML =('Nearby attractions brought to you by Wikimedia.');
 				}, //end success function
 				error: function(response) {
 					// console.log('error occured loading API');
