@@ -5,12 +5,28 @@
 html,
 body,
 input,
-list-view {
+#list-view {
   font-family: 'Raleway', sans-serif;
   color: #525454;
   height: 100%;
   margin: 0;
   padding: 0;
+  text-align: center;
+  /*border: 0.5px solid rgba(82, 82, 82, 0.5);*/
+
+}
+
+#restaurant {
+  border: 0.5px solid #fff;
+  background-color: #f0560b;
+  font-family: 'Raleway', sans-serif;
+  color: #fff;
+  line-height: 30px;
+  height: 30px;
+  cursor:pointer;
+}
+#restaurant:active {
+  background-color: blue;
 }
 
 #map {
@@ -25,9 +41,6 @@ list-view {
 #errorDiv {
   margin-left: 25%;
   text-align: center;
-  /*background: url("images/noMap.png") no-repeat center;
-  background-image: url("images/noMap.svg");
-  background-size: contain;*/
 }
 
 input {
@@ -41,16 +54,13 @@ input {
   /*z-index: 1000;*/
 }
 
-.list {
-  cursor:pointer;
-}
 
 #list-view {
   /*position: fixed;*/
   top: 10px;
   right: 10px;
   width: 100%;
-  background-color: #f0560b;
+  /*background-color: #f0560b;*/
   margin: 0;
   padding: 10px;
   /*z-index: 110;*/
@@ -60,18 +70,34 @@ input {
   margin-top: 10px;
   text-align: center;
 }
+
 .butterArticlesList {
   margin: 10px;
 }
 
 #wikipedia-articles {
-  padding: 10px;
+  padding: 2px;
   text-align: center;
+  margin-bottom: 0px;
 }
+
+#article-item {
+  line-height: 1.2;
+  display: inline-block;
+  vertical-align: middle;
+  margin: 5px;
+}
+
+#attribution {
+  margin-top: 0px;
+  padding: 10px;
+  font-size: 11px;
+  color: #f0560b;
+}
+
 .wikipedia-header {
   padding: 0;
   margin: 0;
-
 }
 
 h1 {
@@ -94,36 +120,59 @@ li {
   font: 12px;
   list-style-type: none;
   text-align: center;
+  margin: 10px;
 }
-
 
 hr {
   border : 0;
   height: 1px;
-  background-image: linear-gradient(to right, rgba(82, 82, 82, 0), rgba(82, 82, 82, 0.75), rgba(82, 82, 82, 0));*/
+  background-image: linear-gradient(to right, rgba(82, 82, 82, 0), rgba(82, 82, 82, 0.75), rgba(82, 82, 82, 0));
 }
 
-hr:last-child {
-  display: none;
+li:last-child,
+li:first-child {
+  border-bottom: : none;
   background-image: none;
 }
 
-br:last-child {
-  display: none;
-  background-image: none;
+#circularTitle {
+ color: #fff;
+ border-radius: 100px;
+ width: 200px;
+ height: 200px;
+ background-color: rgb(240, 86, 11);
+ text-align:center;
+ margin:20px;
+}
+
+#circularTitle h1,
+h2{
+padding:55px 0px 0px 0px;
+/*font-size:18px;*/
+}
+
+.title {
+  font-size: 14px;
 }
 
 #toggleList {
-  background-color: #fff;
-height: 30px;
-width: 100px;
-padding-top: 7.5px;
-margin-bottom: 20px;
-text-align: center;
-visibility: visible;
-/*position: fixed;*/
-/*z-index: 1000;*/
+    background-color: #fff;
+    margin: auto;
+    height: 30px;
+    width: 100px;
+    border: 0.5px;
+    padding: 3px;
+    text-align: center;
+    visibility: visible;
+    border-style: solid;
+    border-color: rgba(240, 86, 11, 0.56);
+    cursor:pointer;
 }
+
+#toggleList:hover {
+  border-color:rgb(240, 86, 11) ;
+}
+
 /* On small screens, set height to 'auto' for sidenav and grid */
 @media screen and (max-width: 300px) {
 
@@ -138,10 +187,6 @@ visibility: visible;
     transition: all 0.2s ease;
     background: 000;
 }
-/*
-#wrapper.toggled {
-    padding-left: 250px;
-}*/
 
 #sidebar-wrapper {
     display:table-cell;
@@ -152,7 +197,7 @@ visibility: visible;
     height: 100%;
     margin-left: -250px;
     overflow-y: auto;
-    background: #fff;
+    background: rgba(255, 255, 255, 0.79);
     -webkit-transition: all 0.2s ease;
     -moz-transition: all 0.2s ease;
     -o-transition: all 0.2s ease;
@@ -242,17 +287,15 @@ visibility: visible;
 }
 
 .info-windows{
-		/*width: 144px;
-		height:106px;
-		color: #ffedc8;*/
   	font-family: 'Raleway', sans-serif;
-		max-width: none;
-		padding:0px;
-		margin:0px;
-	}
-	.info-windows img{
-		padding:10px;
-		margin:0px;
+	max-width: none;
+	padding:0px;
+	margin:0px;
+}
+
+.info-windows img{
+	padding:10px;
+	margin:0px;
     filter: grayscale(1);
     -webkit-filter: grayscale(1);
     -moz-filter: grayscale(1);
@@ -262,7 +305,7 @@ visibility: visible;
 	}
 
 /*thanks to https://paulund.co.uk/css-filter*/
-  .info-windows img:hover {
+.info-windows img:hover {
   	filter: grayscale(0);
   	-webkit-filter: grayscale(0);
   	-moz-filter: grayscale(0);
