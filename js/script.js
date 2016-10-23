@@ -119,8 +119,6 @@ var styles = [{
 self.listViewClick = function(marker, infowindow) {
 	locLat = this.latLng.lat;
 	locLng = this.latLng.lng;
-	var Cool = document.getElementById('wikiTitle2');
-	Cool.textContent = ("Cool things near");
 	map.setZoom(15);
 	map.panTo(this.latLng);
 	google.maps.event.trigger(this.marker, 'click');
@@ -293,6 +291,8 @@ function getPlacesDetails(marker, infowindow) {
 			// Set the marker property on this infowindow so it isn't created again.
 			infowindow.marker = marker;
 			infowindow.marker.addListener('click', toggleBounce);
+			var Cool = document.getElementById('wikiTitle2');
+			Cool.textContent = ("Cool things near");
 			var innerHTML = '<div class=info-windows>';
 			if(place.name) {
 				innerHTML += '<strong>' + place.name + '</strong>';
