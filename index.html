@@ -30,12 +30,14 @@
           			</ul>
 				</div>
 				<div class="wikiArticlesList">
-					<h2 class="wikipedia-header">Cools things near: </h2>
-					<h2 class="wikipedia-header" id="wikiTitle"></h2>
+				  <h2 class="wikipedia-header" id="wikiTitle2"></h2>
+				  <h2 class="wikipedia-header" id="wikiTitle"></h2>
 					<ul id="wikipedia-articles" data-bind="foreach: allWikiArticles">
-						<li data-bind="text: title"></li>
-					</ul>
-				</div>
+						<li id='article-item' data-bind="text: title"></li><br>
+          			</ul>
+         			 <hr>
+         			 <p id='attribution'></p>
+			</div>
 			</div> <!-- end "list" -->
 			<div class="butterArticlesList">
 				<h1>Why Butter?</h1>
