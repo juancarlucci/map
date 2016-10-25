@@ -66,6 +66,10 @@ input {
   /*z-index: 110;*/
 }
 
+.places {
+  width:100%;
+}
+
 .wikiArticlesList {
   margin-top: 10px;
   text-align: center;
