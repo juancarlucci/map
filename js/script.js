@@ -336,7 +336,7 @@ function getPlacesDetails(marker, infowindow) {
 			marker.setAnimation(google.maps.Animation.BOUNCE);
 			setTimeout(function() {
 				marker.setAnimation(null);
-			}, 1500);
+			}, 1400);
 		}
 	}
 }
