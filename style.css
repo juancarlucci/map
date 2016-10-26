@@ -4,7 +4,6 @@
 
 html,
 body,
-input,
 #list-view {
   font-family: 'Raleway', sans-serif;
   color: #525454;
@@ -16,31 +15,57 @@ input,
 
 }
 
-#restaurant {
-  border: 0.5px solid #fff;
-  background-color: #f0560b;
-  font-family: 'Raleway', sans-serif;
-  color: #fff;
-  line-height: 30px;
-  height: 30px;
-  cursor:pointer;
-}
-#restaurant:active {
-  background-color: #808080;
+#circularTitle {
+ color: #fff;
+ border-radius: 100px;
+ width: 200px;
+ height: 200px;
+ background-color: rgb(240, 86, 11);
+ text-align:center;
+ margin:20px;
 }
 
-#map {
-  bottom:0px;
-  height: 100%;
-  left: 0px;
-  position: absolute;
-  right: 0px;
-  /*z-index: 1000;*/
+#circularTitle h1,
+h2{
+padding:55px 0px 0px 0px;
+}
+
+.title {
+  font-size: 14px;
+}
+
+.search {
+  /*width: 100%;*/
+  /*border-color: rgba(240, 86, 11, 0.56);*/
+  border-color: blue;
+}
+.places {
+  width:100%;
+}
+
+#toggleList {
+    background-color: #fff;
+    margin: auto;
+    height: 30px;
+    width: 250px;
+    border: 0.5px;
+    padding: 3px;
+    text-align: center;
+    visibility: visible;
+    border-style: solid;
+    border-color: rgba(240, 86, 11, 0.56);
+    cursor:pointer;
+}
+
+#toggleList:hover,
+input:hover {
+  border-color:rgb(240, 86, 11) ;
 }
 
 #errorDiv {
   margin-left: 25%;
   text-align: center;
+  z-index: 10000;
 }
 
 input {
@@ -51,14 +76,21 @@ input {
   width: 100%;
   font-size: .75em;
   text-align: center;
+  border-color:rgba(240, 86, 11, 0.56) ;
   /*z-index: 1000;*/
 }
 
+.list {
+  width: 100%;
+  /*display: -webkit-flex;
+  display: flex;
+  flex-wrap: wrap;*/
+}
 
 #list-view {
-  /*position: fixed;*/
+  /*position: relative;*/
   top: 10px;
-  right: 10px;
+  /*right: 10px;*/
   width: 100%;
   /*background-color: #f0560b;*/
   margin: 0;
@@ -66,15 +98,10 @@ input {
   /*z-index: 110;*/
 }
 
-.places {
-  width:100%;
-}
-
 .wikiArticlesList {
   margin-top: 10px;
   text-align: center;
 }
-
 .butterArticlesList {
   margin: 10px;
 }
@@ -124,8 +151,14 @@ li {
   font: 12px;
   list-style-type: none;
   text-align: center;
+  /*border-bottom: 1px solid rgba(82, 82, 82, 0.75);*/
+  /*border: 0.5px solid rgba(82, 82, 82, 0.5);*/
+  /*border-bottom: 30px;*/
   margin: 10px;
+  /*height: 1px;*/
+  /*background-image: linear-gradient(to right, rgba(82, 82, 82, 0), rgba(82, 82, 82, 0.75), rgba(82, 82, 82, 0));*/
 }
+
 
 hr {
   border : 0;
@@ -139,41 +172,26 @@ li:first-child {
   background-image: none;
 }
 
-#circularTitle {
- color: #fff;
- border-radius: 100px;
- width: 200px;
- height: 200px;
- background-color: rgb(240, 86, 11);
- text-align:center;
- margin:20px;
+#restaurant {
+  border: 0.5px solid #fff;
+  background-color: #f0560b;
+  font-family: 'Raleway', sans-serif;
+  color: #fff;
+  line-height: 30px;
+  height: 30px;
+  cursor:pointer;
+}
+#restaurant:active {
+  background-color: darkgrey;
 }
 
-#circularTitle h1,
-h2{
-padding:55px 0px 0px 0px;
-}
-
-.title {
-  font-size: 14px;
-}
-
-#toggleList {
-    background-color: #fff;
-    margin: auto;
-    height: 30px;
-    width: 100px;
-    border: 0.5px;
-    padding: 3px;
-    text-align: center;
-    visibility: visible;
-    border-style: solid;
-    border-color: rgba(240, 86, 11, 0.56);
-    cursor:pointer;
-}
-
-#toggleList:hover {
-  border-color:rgb(240, 86, 11) ;
+#map {
+  bottom:0px;
+  height: 100%;
+  left: 0px;
+  position: absolute;
+  right: 0px;
+  /*z-index: 100;*/
 }
 
 /* On small screens, set height to 'auto' for sidenav and grid */
@@ -191,13 +209,14 @@ padding:55px 0px 0px 0px;
     background: 000;
 }
 
-#sidebar-wrapper {
+#sidebar-wrapper,
+#sidebar-wrapper2 {
     display:table-cell;
-    position: fixed;
+    position: absolute;
     z-index: 1000;
     left: 250px;
-    width: 100%;
-    height: 100%;
+    width: 250px;
+    height: auto;
     margin-left: -250px;
     overflow-y: auto;
     background: rgba(255, 255, 255, 0.79);
@@ -210,16 +229,10 @@ padding:55px 0px 0px 0px;
 #page-content-wrapper {
     display:table-cell;
     width: 100%;
-    position: relative;
+    /*position: relative;*/
     padding: 15px;
-}
 
-#wrapper.toggled #page-content-wrapper {
-    position: absolute;
-    margin-right: -250px;
 }
-
-/* Sidebar Styles */
 
 .sidebar-nav {
     /*position: absolute;*/
@@ -230,44 +243,6 @@ padding:55px 0px 0px 0px;
     list-style: none;
 }
 
-.sidebar-nav li {
-    text-indent: 20px;
-    line-height: 40px;
-
-}
-
-.sidebar-nav li a {
-    display: block;
-    text-decoration: none;
-    color: #999999;
-}
-
-.sidebar-nav li a:hover {
-    text-decoration: none;
-    color: #fff;
-    background: rgba(255,255,255,0.2);
-}
-
-.sidebar-nav li a:active,
-.sidebar-nav li a:focus {
-    text-decoration: none;
-}
-
-.sidebar-nav > .sidebar-brand {
-    height: 65px;
-    font-size: 18px;
-    line-height: 60px;
-}
-
-.sidebar-nav > .sidebar-brand a {
-    color: #999999;
-}
-
-.sidebar-nav > .sidebar-brand a:hover {
-    color: #fff;
-    background: none;
-}
-
 #markerLayer img {
   animation: pulse .5s infinite alternate;
   -webkit-animation: pulse .5s infinite alternate;
@@ -275,30 +250,18 @@ padding:55px 0px 0px 0px;
   -webkit-transform-origin: center;
 }
 
-@media(min-width:768px) {
-    #wrapper {
-        padding-left: 150px;
-    }
-
-    #sidebar-wrapper {
-        width: 250px;
-    }
-
-    #wrapper.toggled #sidebar-wrapper {
-        width: 0;
-    }
-}
-
 .info-windows{
+		/*width: 144px;
+		height:106px;
+		color: #ffedc8;*/
   	font-family: 'Raleway', sans-serif;
-	max-width: none;
-	padding:0px;
-	margin:0px;
-}
-
-.info-windows img{
-	padding:10px;
-	margin:0px;
+		max-width: none;
+		padding:0px;
+		margin:0px;
+	}
+	.info-windows img{
+		padding:10px;
+		margin:0px;
     filter: grayscale(1);
     -webkit-filter: grayscale(1);
     -moz-filter: grayscale(1);
@@ -308,7 +271,7 @@ padding:55px 0px 0px 0px;
 	}
 
 /*thanks to https://paulund.co.uk/css-filter*/
-.info-windows img:hover {
+  .info-windows img:hover {
   	filter: grayscale(0);
   	-webkit-filter: grayscale(0);
   	-moz-filter: grayscale(0);
@@ -324,3 +287,78 @@ padding:55px 0px 0px 0px;
     -o-filter: saturate(300%);
     -ms-filter: saturate(300%);
   }
+
+  @media(max-width:768px) {
+      #wrapper {
+          padding-left: 150px;
+      }
+
+      #sidebar-wrapper {
+
+          width: 250px;
+      }
+
+      #wrapper.toggled #sidebar-wrapper {
+          width: 0;
+      }
+
+      #toggleList {
+      position: fixed;
+      /*width: 250px;*/
+
+      }
+      .list {
+        margin-top: 54px;
+      }
+  }
+/*
+  @media(min-width:368px) {
+      #wrapper {
+          padding-left: 150px;
+      }
+
+      #sidebar-wrapper {
+          width: 100%;
+      }
+
+      #wrapper.toggled #sidebar-wrapper {
+          width: 0;
+      }
+      #page-content-wrapper {
+          padding: 15px;
+      }
+
+      #circularTitle {
+
+      }
+
+      #toggleList {
+        width: 100%;
+
+      }
+      .list {
+        width: 100%;
+      }
+      .places {
+        width:75%;
+      }
+      li {
+        font-size: 2em;
+      }
+
+      #blank {
+
+        width:100%;
+        height: 500px;
+        order: 4;
+        pointer-events: none;
+        background-color: grey;
+      }
+      .wikiArticlesList{
+        width:100%;
+
+      }
+      .butterArticlesList {
+
+      }
+  }*/
