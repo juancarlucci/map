@@ -58,7 +58,6 @@ var styles = [{
 		}, {
 			"saturation": -28
 		},
-		// { "color": "#32302f" },
 		{
 			"color": "#e5e3df"
 		}
@@ -68,7 +67,6 @@ var styles = [{
 	"stylers": [{
 			"visibility": "on"
 		},
-		// { "color": "#808080" },
 		{
 			"color": "#e5e3df"
 		}
@@ -288,8 +286,6 @@ function getPlacesDetails(marker, infowindow) {
 			// Set the marker property on this infowindow so it isn't created again.
 			infowindow.marker = marker;
 			infowindow.marker.addListener('click', toggleBounce);
-			var Cool = document.getElementById('wikiTitle2');
-			Cool.textContent = ("Cool things near");
 			var innerHTML = '<div class=info-windows>';
 			if(place.name) {
 				innerHTML += '<strong>' + place.name + '</strong>';
