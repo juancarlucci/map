@@ -31,14 +31,16 @@
 							<li id="restaurant" data-bind="text: locationName, click: listViewClick"></li>
 					</ul>
 				</div>
+				
 				<div class="wikiArticlesList">
-				  <h2 class="wikipedia-header" id="wikiTitle2"></h2>
-				  <h2 class="wikipedia-header" id="wikiTitle"></h2>
-					<ul id="wikipedia-articles" data-bind="foreach: allWikiArticles">
-						<li id='article-item' data-bind="text: title"></li><br>
-          			</ul>
+   				  <h2 class="wikipedia-header" id="wikiTitle2" data-bind='text: allWikiTitles().title'></h2>
+   				  <!-- <h2 class="wikipedia-header" id="wikiTitle"></h2> -->
+				  <h2 class="wikipedia-header" id="wikiTitle" data-bind='text: allWikiArticles().title'></h2>
+   					<ul id="wikipedia-articles" data-bind="foreach: allWikiArticles">
+   						<li id='article-item' data-bind="text: title"></li>
+					</ul>
          			 <hr>
-         			 <p id='attribution'></p>
+				    <p id='attribution'></p>
 			</div>
 			</div> <!-- end "list" -->
 			<div class="butterArticlesList">
