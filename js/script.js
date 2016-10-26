@@ -170,6 +170,8 @@ var koViewModel = function() {
 			locLat = this.lat;
 			locLng = this.lng;
 			self.allWikiTitles("Cool things near " + this.title);
+			// clear location list
+			self.allWikiArticles([]);
 			var hashtag = locLat + '%7C' + locLng;
 			var completeWikiUrl = "https://en.wikipedia.org/w/api.php?action=query&format=json&list=geosearch&gscoord=" + hashtag + "&gsradius=10000&gslimit=5";
 			var _list = $('.link-list');
