@@ -58,6 +58,7 @@ var styles = [{
 		}, {
 			"saturation": -28
 		},
+		// { "color": "#32302f" },
 		{
 			"color": "#e5e3df"
 		}
@@ -67,6 +68,7 @@ var styles = [{
 	"stylers": [{
 			"visibility": "on"
 		},
+		// { "color": "#808080" },
 		{
 			"color": "#e5e3df"
 		}
@@ -86,7 +88,16 @@ var styles = [{
 	"stylers": [{
 		"color": "#ffffff"
 	}]
-}, {
+},
+  {
+    "featureType": "road.highway",
+    "elementType": "labels.icon",
+    "stylers": [
+      {
+        "visibility": "off"
+      }
+    ]
+  }, {
 	"featureType": "landscape",
 	"stylers": [{
 		"visibility": "on"
