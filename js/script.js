@@ -191,14 +191,18 @@ var koViewModel = function() {
 				jsonp: "callback",
 				success: function(response) {
 					var articleList = response.query.geosearch;
-					for(var i = 0; i < articleList.length; i++) {
-						var article = articleList[i];
-						self.allWikiArticles.push(article); // push articles to observable array				
-					}
+					articleList.forEach(function(article) {
+						self.allWikiArticles.push(article);
+					});
 					var attribution = document.getElementById("attribution").innerHTML =('Nearby attractions brought to you by Wikimedia.');
 				}, //end success function
 				error: function(response) {
 					console.log('Oops...API did not load');
+					swal({
+					  title: "Oops!",
+					  text: "API failed to load.",
+					  imageUrl: "images/noAPI2.svg"
+					});
 				}
 			}); //end AJAX call
 		}); //end place.marker.addListener
