@@ -125,18 +125,19 @@ var styles = [{
 		"visibility": "on"
 	}]
 }];
-self.listViewClick = function(marker, infowindow) {
+
+
+var koViewModel = function() {
+	var self = this;
+	
+	self.listViewClick = function(marker, infowindow) {
 	locLat = this.latLng.lat;
 	locLng = this.latLng.lng;
 	map.setZoom(15);
 	map.panTo(this.latLng);
 	google.maps.event.trigger(this.marker, 'click');
-}; //end listViewClick
-
-var koViewModel = function() {
-	var locLat = [];
-	var locLng = [];
-	var self = this;
+	}; //end listViewClick
+	
 	var largeInfowindow = new google.maps.InfoWindow();
 	// Build "Place" objects out of raw place data. It is common to receive place
 	// data from an API like FourSquare. Place objects are defined by a custom
