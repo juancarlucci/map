@@ -136,7 +136,6 @@ self.listViewClick = function(marker, infowindow) {
 var koViewModel = function() {
 	var locLat = [];
 	var locLng = [];
-	// console.log(locLat);
 	var self = this;
 	var largeInfowindow = new google.maps.InfoWindow();
 	// Build "Place" objects out of raw place data. It is common to receive place
@@ -166,7 +165,6 @@ var koViewModel = function() {
 			lat: place.latLng.lat,
 			lng: place.latLng.lng,
 			animation: google.maps.Animation.DROP,
-			// icon: butterIcon,
 			icon: defaultIcon,
 			title: place.locationName,
 			placeId: place.placeId,
@@ -194,14 +192,11 @@ var koViewModel = function() {
 					var articleList = response.query.geosearch;
 					for(var i = 0; i < articleList.length; i++) {
 						var article = articleList[i];
-						self.allWikiArticles.push(article); // push articles to observable array
-					
+						self.allWikiArticles.push(article); // push articles to observable array				
 					}
 					var attribution = document.getElementById("attribution").innerHTML =('Nearby attractions brought to you by Wikimedia.');
 				}, //end success function
 				error: function(response) {
-					// console.log('error occured loading API');
-					// errorSVG.textContent = ('Oops...Map did not load');
 					console.log('Oops...API did not load');
 				}
 			}); //end AJAX call
@@ -299,6 +294,7 @@ function getPlacesDetails(marker, infowindow) {
 			// Set the marker property on this infowindow so it isn't created again.
 			infowindow.marker = marker;
 			infowindow.marker.addListener('click', toggleBounce);
+			console.log("getPlacesDetails if " + place.name);
 			var innerHTML = '<div class=info-windows>';
 			if(place.name) {
 				innerHTML += '<strong>' + place.name + '</strong>';
@@ -321,13 +317,6 @@ function getPlacesDetails(marker, infowindow) {
 			innerHTML += '</div>';
 			infowindow.setContent(innerHTML);
 			infowindow.open(map, marker);
-			// trying to prevent infowindow getting clipped: http://www.emanueletessore.com/google-maps-balloon-position/
-			// infowindow.addListener('tilesloaded', map, function() {
-			// 	infowindow.open(map,marker);
-			// 	});
-			// google.maps.event.addListener(map, 'tilesloaded', function() {
-			// 	infowindow.open(map,marker);
-			// 	});
 			// Make sure the marker property is cleared if the infowindow is closed.
 			infowindow.addListener('closeclick', function() {
 				infowindow.marker = null;
@@ -338,8 +327,10 @@ function getPlacesDetails(marker, infowindow) {
 	function toggleBounce() {
 		if(marker.getAnimation() !== null) {
 			marker.setAnimation(null);
+			console.log("ToggleBounce if " + marker.title);
 		} else {
 			marker.setAnimation(google.maps.Animation.BOUNCE);
+			console.log("ToggleBounce else " + marker.title);
 			setTimeout(function() {
 				marker.setAnimation(null);
 			}, 1400);
