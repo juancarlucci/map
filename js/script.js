@@ -283,6 +283,7 @@ var mapInit = function() {
 	ko.applyBindings(new koViewModel(googleMap, locationData));
 };
 var googleError = function(onerror) {
+
 	//  Mozilla recommendes you not use innerHTML when inserting plain text; instead, use node.textContent. This doesn't interpret the passed content as HTML, but instead inserts it as raw text.
 	//https://developer.mozilla.org/en-US/docs/Web/API/Element/innerHTML
 	errorSVG.textContent = ('Oops...Map did not load');
@@ -291,7 +292,7 @@ var googleError = function(onerror) {
 };
 
 function getPlacesDetails(marker, infowindow) {
-	toggleBounce();
+// 	toggleBounce();
 	var service = new google.maps.places.PlacesService(map);
 	service.getDetails({
 		placeId: marker.placeId
@@ -299,6 +300,7 @@ function getPlacesDetails(marker, infowindow) {
 		if(status === google.maps.places.PlacesServiceStatus.OK) {
 			// Set the marker property on this infowindow so it isn't created again.
 			infowindow.marker = marker;
+			infowindow.marker.addListener('click', toggleBounce);
 			console.log("getPlacesDetails if " + place.name);
 			var innerHTML = '<div class=info-windows>';
 			if(place.name) {
