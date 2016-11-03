@@ -1,8 +1,10 @@
+// function strict(){
 // adapted from http://codepen.io/prather-mcs/pen/KpjbNN
 // and from https://classroom.udacity.com/nanodegrees/nd001/parts/00113454014/modules/4fd8d440-9428-4de7-93c0-4dca17a36700/lessons/8304370457/concepts/83061122970923#
 // var map;
-// "use strict";
+var self = this;
 var map = self.googleMap;
+var allWikiArticles;
 var errorSVG = document.getElementById("errorDiv");
 var locationData = [{
 	locationName: 'Homestead',
@@ -40,6 +42,7 @@ var locationData = [{
 	},
 	id: 'ChIJ78j3OdSAhYAR_nZU8ILRNUU'
 }];
+
 var styles = [{
 	"elementType": "labels.text.fill",
 	"stylers": [{
@@ -58,7 +61,6 @@ var styles = [{
 		}, {
 			"saturation": -28
 		},
-		// { "color": "#32302f" },
 		{
 			"color": "#e5e3df"
 		}
@@ -68,7 +70,6 @@ var styles = [{
 	"stylers": [{
 			"visibility": "on"
 		},
-		// { "color": "#808080" },
 		{
 			"color": "#e5e3df"
 		}
@@ -88,16 +89,13 @@ var styles = [{
 	"stylers": [{
 		"color": "#ffffff"
 	}]
-},
-  {
-    "featureType": "road.highway",
-    "elementType": "labels.icon",
-    "stylers": [
-      {
-        "visibility": "off"
-      }
-    ]
-  }, {
+}, {
+	"featureType": "road.highway",
+	"elementType": "labels.icon",
+	"stylers": [{
+		"visibility": "off"
+	}]
+}, {
 	"featureType": "landscape",
 	"stylers": [{
 		"visibility": "on"
@@ -125,19 +123,22 @@ var styles = [{
 		"visibility": "on"
 	}]
 }];
-
-
+var favorited = function() {
+	$('.favme').click(function() {
+		$(this).toggleClass('active');
+		console.log('fav');
+	});
+};
 var koViewModel = function() {
 	var self = this;
-	
-	self.listViewClick = function(marker, infowindow) {
-	locLat = this.latLng.lat;
-	locLng = this.latLng.lng;
-	map.setZoom(15);
-	map.panTo(this.latLng);
-	google.maps.event.trigger(this.marker, 'click');
+	listViewClick = function(marker, infowindow) {
+		var locLat = [];
+		var locLng = [];
+		console.log("listViewClick : " + this.locationName);
+		map.setZoom(15);
+		map.panTo(this.latLng);
+		google.maps.event.trigger(this.marker, 'click');
 	}; //end listViewClick
-	
 	var largeInfowindow = new google.maps.InfoWindow();
 	// Build "Place" objects out of raw place data. It is common to receive place
 	// data from an API like FourSquare. Place objects are defined by a custom
@@ -153,12 +154,15 @@ var koViewModel = function() {
 	var defaultIcon = {
 		url: 'images/butter.png',
 	};
-
+	// var defaultIcon = butterIcon;
+	// Create a "highlighted location" marker color for when the user
+	// mouses over the marker.
+	// var highlightedIcon = makeMarkerIcon('f0560b');
 	var highlightedIcon = {
 		url: 'images/butter2.png',
 	};
 
-	// Build Markers via the Maps API and place them on the map.
+	// Build Markers via the Maps API and place them on the map
 	self.allPlaces.forEach(function(place) {
 		var markerOptions = {
 			map: map,
@@ -171,16 +175,13 @@ var koViewModel = function() {
 			placeId: place.placeId,
 		};
 		place.marker = new google.maps.Marker(markerOptions);
-		// You might also add listeners onto the marker, such as "click" listeners.
-		// place.marker.addListener('click', function() {
-		//   populateInfoWindow(this, largeInfowindow);
-		// });
+		// Add "click" listeners.
+
 		place.marker.addListener('click', function() {
 			getPlacesDetails(this, largeInfowindow);
 			locLat = this.lat;
 			locLng = this.lng;
 			self.allWikiTitles("Cool things near " + this.title);
-			// clear location list
 			self.allWikiArticles([]);
 			var hashtag = locLat + '%7C' + locLng;
 			var completeWikiUrl = "https://en.wikipedia.org/w/api.php?action=query&format=json&list=geosearch&gscoord=" + hashtag + "&gsradius=10000&gslimit=5";
@@ -194,14 +195,15 @@ var koViewModel = function() {
 					articleList.forEach(function(article) {
 						self.allWikiArticles.push(article);
 					});
-					var attribution = document.getElementById("attribution").innerHTML =('Nearby attractions brought to you by Wikimedia.');
+					var attribution = document.getElementById("attribution").innerHTML = ('Nearby attractions brought to you by Wikimedia.');
+
 				}, //end success function
 				error: function(response) {
 					console.log('Oops...API did not load');
 					swal({
-					  title: "Oops!",
-					  text: "API failed to load.",
-					  imageUrl: "images/noAPI2.svg"
+						title: "Oops!",
+						text: "API failed to load.",
+						imageUrl: "images/noAPI2.svg"
 					});
 				}
 			}); //end AJAX call
@@ -215,10 +217,10 @@ var koViewModel = function() {
 		place.marker.addListener('mouseout', function() {
 			this.setIcon(defaultIcon);
 		});
-	});
+	}); // end self.allPlaces.forEach
+	
 	// This array will contain what its name implies: only the markers that should
-	// be visible based on user input. My solution does not need to use an
-	// observableArray for this purpose, but other solutions may require that.
+	// be visible based on user input.
 	self.visiblePlaces = ko.observableArray();
 	// All places should be visible at first. We only want to remove them if the
 	// user enters some input which would filter some of them out.
@@ -250,20 +252,19 @@ var koViewModel = function() {
 	};
 	self.wikiArticles = ko.observableArray();
 	var allWikiArticles = [];
+	console.log(allWikiArticles);
 	self.allWikiArticles = ko.observableArray();
 	allWikiArticles.forEach(function(article) {
 		self.wikiArticles.push(article);
 	});
-		
 	self.allWikiTitles = ko.observableArray();
-	var allWikiTitles =[];
 }; //end koViewModel
 
 function Place(dataObj) {
 	this.placeId = dataObj.id;
 	this.locationName = dataObj.locationName;
 	this.latLng = dataObj.latLng;
-	// You will save a reference to the Places' map marker after you build the
+	// Save a reference to the Places' map marker after you build the
 	// marker:
 	this.marker = null;
 }
@@ -283,11 +284,8 @@ var mapInit = function() {
 	ko.applyBindings(new koViewModel(googleMap, locationData));
 };
 var googleError = function(onerror) {
-
 	//  Mozilla recommendes you not use innerHTML when inserting plain text; instead, use node.textContent. This doesn't interpret the passed content as HTML, but instead inserts it as raw text.
 	//https://developer.mozilla.org/en-US/docs/Web/API/Element/innerHTML
-	errorSVG.textContent = ('Oops...Map did not load');
-	console.log('Oops...map did not load');
 	errorSVG.innerHTML = "<img src='images/noMap.svg' alt='Map failed to load'/>";
 };
 
@@ -300,8 +298,6 @@ function getPlacesDetails(marker, infowindow) {
 		if(status === google.maps.places.PlacesServiceStatus.OK) {
 			// Set the marker property on this infowindow so it isn't created again.
 			infowindow.marker = marker;
-// 			infowindow.marker.addListener('click', toggleBounce);
-			console.log("getPlacesDetails if " + place.name);
 			var innerHTML = '<div class=info-windows>';
 			if(place.name) {
 				innerHTML += '<strong>' + place.name + '</strong>';
@@ -319,28 +315,28 @@ function getPlacesDetails(marker, infowindow) {
 				innerHTML += '<br><br><img src="' + place.photos[0].getUrl({
 					maxHeight: 100,
 					maxWidth: 200
-				}) + '">' + '<p>hover over image</p>';
+				}) + '">' + '<p>hover over image</p>' + '<i class="fa fa-heart favme"></i>';
 			}
 			innerHTML += '</div>';
 			infowindow.setContent(innerHTML);
 			infowindow.open(map, marker);
-			// Make sure the marker property is cleared if the infowindow is closed.
 			infowindow.addListener('closeclick', function() {
 				infowindow.marker = null;
+				console.log(this);
 			});
 		}
-	});
+	}); //end function (place status)
+	
 	// adapted from https://developers.google.com/maps/documentation/javascript/examples/marker-animations?hl=de
 	function toggleBounce() {
 		if(marker.getAnimation() !== null) {
 			marker.setAnimation(null);
-			console.log("ToggleBounce if " + marker.title);
 		} else {
 			marker.setAnimation(google.maps.Animation.BOUNCE);
-			console.log("ToggleBounce else " + marker.title);
 			setTimeout(function() {
 				marker.setAnimation(null);
 			}, 1400);
 		}
 	}
-}
+} //end getPlacesDetails
+// } //end strict
