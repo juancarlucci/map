@@ -22,6 +22,7 @@ You will also see a section on the left panel that shows "Cool things near:" you
 * **index.html**: The main HTML document. Contains links to all of the CSS and JS resources needed to render the Map.
 * **js/script.js**: Contains helper code needed to format and build the map. 
 * **style.css**: Contains all of the CSS needed to style the page.
+* **sweetalert.css**: CSS needed to style the error alert.
 * **README.md**: The GitHub readme file.
 * and some images in the images directory.
 
