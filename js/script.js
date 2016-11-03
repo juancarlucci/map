@@ -291,6 +291,7 @@ var googleError = function(onerror) {
 };
 
 function getPlacesDetails(marker, infowindow) {
+	toggleBounce();
 	var service = new google.maps.places.PlacesService(map);
 	service.getDetails({
 		placeId: marker.placeId
@@ -298,7 +299,6 @@ function getPlacesDetails(marker, infowindow) {
 		if(status === google.maps.places.PlacesServiceStatus.OK) {
 			// Set the marker property on this infowindow so it isn't created again.
 			infowindow.marker = marker;
-			infowindow.marker.addListener('click', toggleBounce);
 			console.log("getPlacesDetails if " + place.name);
 			var innerHTML = '<div class=info-windows>';
 			if(place.name) {
