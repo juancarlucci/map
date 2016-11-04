@@ -185,7 +185,6 @@ var koViewModel = function() {
 			self.allWikiArticles([]);
 			var hashtag = locLat + '%7C' + locLng;
 			var completeWikiUrl = "https://en.wikipedia.org/w/api.php?action=query&format=json&list=geosearch&gscoord=" + hashtag + "&gsradius=10000&gslimit=5";
-			var _list = $('.link-list');
 			$.ajax({
 				url: completeWikiUrl,
 				dataType: "jsonp",
