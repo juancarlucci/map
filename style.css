@@ -102,14 +102,6 @@ input {
 	width: 100%;
 }
 
-#article-item:hover::before {
-	font-family: FontAwesome;
-	content: "\f004";
-	display: inline-block;
-	padding-right: 5px;
-	vertical-align: middle;
-}
-
 #attribution {
 	margin-top: 0px;
 	padding: 10px;
