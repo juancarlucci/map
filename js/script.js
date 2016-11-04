@@ -314,7 +314,7 @@ function getPlacesDetails(marker, infowindow) {
 				innerHTML += '<br><br><img src="' + place.photos[0].getUrl({
 					maxHeight: 100,
 					maxWidth: 200
-				}) + '">' + '<p>hover over image</p>' + '<i class="fa fa-heart favme"></i>';
+				}) + '">' + '<p>hover over image</p>';
 			}
 			innerHTML += '</div>';
 			infowindow.setContent(innerHTML);
