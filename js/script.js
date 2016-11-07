@@ -153,6 +153,7 @@ var koViewModel = function() {
 	// var defaultIcon = makeMarkerIcon('808080');
 	var defaultIcon = {
 		url: 'images/butter.png',
+		scaledSize: new google.maps.Size(50, 83)
 	};
 	// var defaultIcon = butterIcon;
 	// Create a "highlighted location" marker color for when the user
@@ -160,6 +161,7 @@ var koViewModel = function() {
 	// var highlightedIcon = makeMarkerIcon('f0560b');
 	var highlightedIcon = {
 		url: 'images/butter2.png',
+		scaledSize: new google.maps.Size(50, 83)
 	};
 
 	// Build Markers via the Maps API and place them on the map
