@@ -42,7 +42,6 @@ var locationData = [{
 	},
 	id: 'ChIJ78j3OdSAhYAR_nZU8ILRNUU'
 }];
-
 var styles = [{
 	"elementType": "labels.text.fill",
 	"stylers": [{
@@ -57,23 +56,19 @@ var styles = [{
 }, {
 	"featureType": "landscape.natural",
 	"stylers": [{
-			"visibility": "on"
-		}, {
-			"saturation": -28
-		},
-		{
-			"color": "#e5e3df"
-		}
-	]
+		"visibility": "on"
+	}, {
+		"saturation": -28
+	}, {
+		"color": "#e5e3df"
+	}]
 }, {
 	"featureType": "poi",
 	"stylers": [{
-			"visibility": "on"
-		},
-		{
-			"color": "#e5e3df"
-		}
-	]
+		"visibility": "on"
+	}, {
+		"color": "#e5e3df"
+	}]
 }, {
 	"elementType": "labels.text.stroke",
 	"stylers": [{
@@ -123,6 +118,7 @@ var styles = [{
 		"visibility": "on"
 	}]
 }];
+
 var favorited = function() {
 	$('.favme').click(function() {
 		$(this).toggleClass('active');
@@ -163,7 +159,6 @@ var koViewModel = function() {
 		url: 'images/butter2.png',
 		scaledSize: new google.maps.Size(50, 83)
 	};
-
 	// Build Markers via the Maps API and place them on the map
 	self.allPlaces.forEach(function(place) {
 		var markerOptions = {
@@ -178,7 +173,6 @@ var koViewModel = function() {
 		};
 		place.marker = new google.maps.Marker(markerOptions);
 		// Add "click" listeners.
-
 		place.marker.addListener('click', function() {
 			getPlacesDetails(this, largeInfowindow);
 			locLat = this.lat;
@@ -197,7 +191,6 @@ var koViewModel = function() {
 						self.allWikiArticles.push(article);
 					});
 					var attribution = document.getElementById("attribution").innerHTML = ('Nearby attractions brought to you by Wikimedia.');
-
 				}, //end success function
 				error: function(response) {
 					console.log('Oops...API did not load');
@@ -209,7 +202,6 @@ var koViewModel = function() {
 				}
 			}); //end AJAX call
 		}); //end place.marker.addListener
-		
 		// Two event listeners - one for mouseover, one for mouseout,
 		// to change the colors back and forth.
 		place.marker.addListener('mouseover', function() {
@@ -219,7 +211,6 @@ var koViewModel = function() {
 			this.setIcon(defaultIcon);
 		});
 	}); // end self.allPlaces.forEach
-	
 	// This array will contain what its name implies: only the markers that should
 	// be visible based on user input.
 	self.visiblePlaces = ko.observableArray();
@@ -260,7 +251,6 @@ var koViewModel = function() {
 	});
 	self.allWikiTitles = ko.observableArray();
 }; //end koViewModel
-
 function Place(dataObj) {
 	this.placeId = dataObj.id;
 	this.locationName = dataObj.locationName;
@@ -327,7 +317,6 @@ function getPlacesDetails(marker, infowindow) {
 			});
 		}
 	}); //end function (place status)
-	
 	// adapted from https://developers.google.com/maps/documentation/javascript/examples/marker-animations?hl=de
 	function toggleBounce() {
 		if(marker.getAnimation() !== null) {
@@ -340,4 +329,3 @@ function getPlacesDetails(marker, infowindow) {
 		}
 	}
 } //end getPlacesDetails
-// } //end strict
