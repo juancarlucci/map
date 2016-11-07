@@ -162,7 +162,7 @@ li:first-child {
 	bottom: 0px;
 	height: 100%;
 	left: 0px;
-	position: fixed;
+	position: fixed !important;
 	right: 0px;
   /*z-index: 100;*/;
 }
